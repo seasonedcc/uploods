@@ -1,15 +1,36 @@
-import React, {Component} from 'react'
-import {render} from 'react-dom'
+import React, { Component } from 'react'
+import { render } from 'react-dom'
+import { CroodsProvider, Fetch, useCroods } from 'croods'
 
-import Example from '../../src'
+import Uplood from '../../src'
 
-class Demo extends Component {
-  render() {
-    return <div>
-      <h1>uploods Demo</h1>
-      <Example/>
+const Demo = props => {
+  // const [state, { save }] = useCroods({ name: 'profile' })
+  return (
+    <div
+      style={{
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        padding: '30px',
+      }}
+    >
+      <Uplood setField={value => console.log('field', value)} />
     </div>
-  }
+  )
 }
 
-render(<Demo/>, document.querySelector('#demo'))
+const App = props => {
+  return (
+    <CroodsProvider
+      debugRequests
+      debugActions
+      baseUrl="https://reqres.in/api/"
+      parseResponse={({ data }) => data.data}
+    >
+      <Demo />
+    </CroodsProvider>
+  )
+}
+
+render(<App />, document.querySelector('#demo'))
