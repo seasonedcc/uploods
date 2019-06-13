@@ -1,6 +1,6 @@
 {
   "name": "uploods",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "description": "uploods React component",
   "main": "lib/index.js",
   "module": "es/index.js",
@@ -21,11 +21,11 @@
   },
   "dependencies": {
     "@material-ui/core": "^4.1.0",
-    "croods": "^1.0.8",
     "react-dropzone": "^10.1.5"
   },
   "peerDependencies": {
-    "react": "16.x"
+    "react": "16.x",
+    "croods": "^1.0.8"
   },
   "devDependencies": {
     "nwb": "0.23.x",

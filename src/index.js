@@ -2,6 +2,8 @@ import React, { Component, useState, useCallback, useEffect } from 'react'
 import Dropzone from 'react-dropzone'
 import Typography from '@material-ui/core/Typography'
 import Paper from '@material-ui/core/Paper'
+import TextField from '@material-ui/core/TextField'
+import FormHelperText from '@material-ui/core/FormHelperText'
 import FilesList from './FilesList'
 
 export default ({
@@ -9,15 +11,18 @@ export default ({
   initialValues,
   width = '100%',
   containerStyle,
+  inputStyle,
   hideList,
   maxSize = 100000,
-
-  text = 'Drag and drop some files here, or click to select files',
+  text = 'Drag some files here, or click to select files',
+  dragActiveText = 'Drop here!',
+  unsupportedText = 'Unsupported File...',
 
   ...props
 }) => {
   const [files, setFiles] = useState([])
-  const error = 'error'
+  const [message, setMessage] = useState(text)
+  // eslint-disable-next-line
   // Parses a file and returns a promisse that resolves to base64 string.
   const parseFile = async file => {
     const reader = new FileReader()
@@ -31,22 +36,6 @@ export default ({
       }
       reader.readAsDataURL(file)
     })
-  }
-  const renderDragMessage = ({ isDragActive, isDragReject, rejectedFiles }) => {
-    let text = 'Arraste os arquivos aqui'
-    if (isDragActive) {
-      text = 'Solte os arquivos aqui'
-    }
-    if (rejectedFiles.length || isDragReject) {
-      text = 'Arquivo não suportado'
-      clearTimeout()
-      setTimeout(() => {
-        console.log('timeout?')
-        text = 'Arraste os arquivos aqui'
-      }, 3000)
-    }
-
-    return <Typography type="success">{text}</Typography>
   }
 
   useEffect(() => {
@@ -62,14 +51,20 @@ export default ({
     <Paper
       style={{
         width,
+        padding: '10px',
         ...containerStyle,
       }}
-      elevation={0}
+      elevation={1}
     >
       <Dropzone
         maxSize={maxSize}
+        onDropRejected={aa => {
+          setMessage(unsupportedText)
+          setTimeout(() => {
+            setMessage(text)
+          }, 3000)
+        }}
         onDrop={async acceptedFiles => {
-          console.log('acc', [...acceptedFiles[0]])
           const parsedFiles = await Promise.all(
             acceptedFiles.map(async file => {
               const { path, name, type, size } = file
@@ -85,7 +80,7 @@ export default ({
           setFiles([...files, ...parsedFiles])
         }}
       >
-        {({ getRootProps, getInputProps, ...props }) => (
+        {({ getRootProps, getInputProps, isDragActive }) => (
           <div
             {...getRootProps()}
             style={{
@@ -97,13 +92,17 @@ export default ({
               display: 'flex',
               justifyContent: 'center',
               alignItems: 'center',
+              ...inputStyle,
             }}
           >
             <input {...getInputProps()} />
-            {renderDragMessage(props)}
+            <FormHelperText error={message === unsupportedText}>
+              {isDragActive ? dragActiveText : message}
+            </FormHelperText>
           </div>
         )}
       </Dropzone>
+
       {hideList || <FilesList files={files} />}
     </Paper>
   )

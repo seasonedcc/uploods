@@ -14,14 +14,14 @@ const humanizeBytes = size => {
   }`
 }
 
-const clipName = text =>
-  text.length < 35
+// Adjustable clip?
+const clipName = text => {
+  return text.length < 35
     ? text
     : `${text.slice(0, 22)}...${text.slice(text.length - 10)}`
-
+}
 // TODO: preview for non images (icon)
 export default ({ files }) => {
-  console.log('files', files)
   return files.length ? (
     <div>
       <List>
@@ -35,7 +35,7 @@ export default ({ files }) => {
               />
             </ListItemAvatar>
             <ListItemText
-              primary={clipName(file.name)}
+              primary={clipName(file.path)}
               secondary={humanizeBytes(file.size)}
             />
           </ListItem>
