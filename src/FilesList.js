@@ -18,24 +18,14 @@ import { filterById, humanizeBytes, clipName } from './utils'
 // TODO: preview for non images (icon)
 const FilePreview = ({ type, parsed }) => {
   const [prefix] = type.split('/')
-  if (prefix === 'image') {
-    return (
-      <ListItemAvatar>
-        <Avatar style={{ borderRadius: 0 }} alt="Preview" src={parsed} />
-      </ListItemAvatar>
-    )
-  }
 
-  if (type === 'application/pdf') {
-    return (
-      <ListItemIcon>
-        <PDFIcon />
-      </ListItemIcon>
-    )
-  }
-  return (
+  return prefix === 'image' ? (
+    <ListItemAvatar>
+      <Avatar style={{ borderRadius: 0 }} alt="Preview" src={parsed} />
+    </ListItemAvatar>
+  ) : (
     <ListItemIcon>
-      <FileIcon />
+      {type === 'application/pdf' ? <PDFIcon /> : <FileIcon />}
     </ListItemIcon>
   )
 }

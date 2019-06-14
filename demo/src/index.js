@@ -4,9 +4,15 @@ import Uplood from '../../src'
 
 const App = () => {
   const [files, setFiles] = useState([])
-  console.log(files)
   return (
     <div style={{ background: '#653e94', minHeight: '100vh' }}>
+      {!!files.length && (
+        <ul style={{ margin: 0, paddingLeft: 20 }}>
+          {files.map((file, index) => (
+            <li key={index}>{file.name}</li>
+          ))}
+        </ul>
+      )}
       <div
         style={{
           display: 'flex',
