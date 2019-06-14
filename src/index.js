@@ -1,29 +1,29 @@
-import React, { Component, useState, useCallback, useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
+import PropTypes from 'prop-types'
 import Dropzone from 'react-dropzone'
-import Typography from '@material-ui/core/Typography'
 import Paper from '@material-ui/core/Paper'
-import TextField from '@material-ui/core/TextField'
 import FormHelperText from '@material-ui/core/FormHelperText'
 import uniqueId from 'lodash/uniqueId'
 import FilesList from './FilesList'
+import { sleep } from './utils'
+import styles from './styles'
 
-export default ({
+const Uploods = ({
   onChange,
-  initialValues,
-  width = '100%',
+  width,
   containerStyle,
   inputStyle,
   hideList,
   accept,
-  maxSize = 10000,
-  elevation = 0,
-  text = 'Drag some files here, or click to select files',
-  dragActiveText = 'Drop here!',
-  unsupportedText = 'Unsupported File...',
-  ...props
+  maxSize,
+  elevation,
+  text,
+  dragActiveText,
+  unsupportedText,
 }) => {
   const [files, setFiles] = useState([])
   const [message, setMessage] = useState(text)
+
   // Parses one file and returns a promisse that resolves to base64 string.
   const parseFile = async file => {
     const reader = new FileReader()
@@ -41,28 +41,21 @@ export default ({
 
   useEffect(() => {
     const list = files.map(file => file.parsed)
-    // const output = list.length > 1 || multiple ? list : list[0]
     onChange(list)
-    // eslint-disable-next-line
   }, [files])
 
   return (
     <Paper
-      style={{
-        width,
-        padding: '10px',
-        ...containerStyle,
-      }}
+      style={{ width, ...styles.container, ...containerStyle }}
       elevation={elevation}
     >
       <Dropzone
-        accept={({}, accept)}
+        acceptedFiles={accept}
         maxSize={maxSize * 1000}
-        onDropRejected={aa => {
+        onDropRejected={async () => {
           setMessage(unsupportedText)
-          setTimeout(() => {
-            setMessage(text)
-          }, 3000)
+          await sleep(3000)
+          setMessage(text)
         }}
         onDrop={async acceptedFiles => {
           const parsedFiles = await Promise.all(
@@ -84,17 +77,7 @@ export default ({
         {({ getRootProps, getInputProps, isDragActive }) => (
           <div
             {...getRootProps()}
-            style={{
-              border: '1px dashed #ddd',
-              borderRadius: '4px',
-              padding: '15px',
-              cursor: 'pointer',
-              transition: 'height 0.2s ease',
-              display: 'flex',
-              justifyContent: 'center',
-              alignItems: 'center',
-              ...inputStyle,
-            }}
+            style={{ ...styles.dropzone, ...inputStyle }}
           >
             <input {...getInputProps()} />
             <FormHelperText error={message === unsupportedText}>
@@ -108,3 +91,28 @@ export default ({
     </Paper>
   )
 }
+
+Uploods.propTypes = {
+  onChange: PropTypes.func.isRequired,
+  width: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+  containerStyle: PropTypes.object,
+  inputStyle: PropTypes.object,
+  hideList: PropTypes.bool,
+  accept: PropTypes.arrayOf(PropTypes.string),
+  maxSize: PropTypes.number,
+  elevation: PropTypes.number,
+  text: PropTypes.string,
+  dragActiveText: PropTypes.string,
+  unsupportedText: PropTypes.string,
+}
+
+Uploods.defaultProps = {
+  width: '100%',
+  maxSize: 10000,
+  elevation: 0,
+  text: 'Drag some files here, or click to select files',
+  dragActiveText: 'Drop here!',
+  unsupportedText: 'Unsupported File...',
+}
+
+export default Uploods

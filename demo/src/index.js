@@ -1,21 +1,22 @@
-import React, { Component } from 'react'
+import React, { useState } from 'react'
 import { render } from 'react-dom'
 import Uplood from '../../src'
 
-const App = props => {
+const App = () => {
+  const [files, setFiles] = useState([])
+  console.log(files)
   return (
-    <div
-      style={{
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        padding: '30px',
-      }}
-    >
-      <Uplood
-        accept={['image/*']}
-        onChange={files => console.log('files:', files)}
-      />
+    <div style={{ background: '#653e94', minHeight: '100vh' }}>
+      <div
+        style={{
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          padding: '30px',
+        }}
+      >
+        <Uplood accept={['image/*', 'application/pdf']} onChange={setFiles} />
+      </div>
     </div>
   )
 }

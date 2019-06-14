@@ -1,6 +1,6 @@
 module.exports = {
-  extends: "eslint-config-seasoned",
+  extends: 'eslint-config-seasoned',
   rules: {
-    "sort-keys": 0
-  }
-};
+    'react-hooks/exhaustive-deps': 0,
+  },
+}
