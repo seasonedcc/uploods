@@ -15,7 +15,7 @@ Describe uploods here.
 
 | Property                            |  Type  | Required |                     Default                     |
 | ----------------------------------- | :----: | :------: | :---------------------------------------------: |
-| [onChange](#name)                   |  Func  |    ✔     |                        -                        |
+| [onChange](#onchange)               |  Func  |    ✔     |                        -                        |
 | [containerStyle](#containerstyle)   | Object |          |                        -                        |
 | [inputStyle](#inputstyle)           | Object |          |                        -                        |
 | [hideList](#hidelist)               |  Bool  |          |                      false                      |
@@ -28,7 +28,17 @@ Describe uploods here.
 
 ## onChange
 
-A function to be called everytime a file is included (or removed from list)
+A function to be called every time files are included or removed from the list. It receives an array with all the files, each one represented by an object with the following properties:
+
+```
+  {
+  name: <STRING> 'filename',
+  parsed: <STRING>  'base64 string representation of file',
+  size: <INT> size in bytes,
+  type: <STRING> 'file MIME type',
+}
+```
+
 ex: `files => console.log('Uploaded files: ',files)`
 
 ## containerStyle
@@ -37,21 +47,21 @@ An object containing the style to be applied to component's container, an MUI's 
 
 ## inputStyle
 
-An object containing the style to be applied to the input
+An object containing the style to be applied to the input.
 
 ## hideList
 
-If true, will hide the files list
+If true, will hide the list of files.
 
 ## accept
 
 An array containg MIME file types accepted. Supports wildcards like `image/*`
 
-## maxSize = 10000
+## maxSize
 
 Maximum size accepted for each file, measured in KB.
 
-## elevation = 0
+## elevation
 
 Elevation prop passed to the container, an MUI's [Paper](https://material-ui.com/components/paper/)
 
@@ -66,3 +76,7 @@ Text shown when user is dragging files over the component.
 ## unsupportedText = 'Unsupported File...'
 
 Text shown when a file is rejected (either by file type or size).
+
+```
+
+```
