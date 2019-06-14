@@ -4,26 +4,27 @@ import Typography from '@material-ui/core/Typography'
 import Paper from '@material-ui/core/Paper'
 import TextField from '@material-ui/core/TextField'
 import FormHelperText from '@material-ui/core/FormHelperText'
+import uniqueId from 'lodash/uniqueId'
 import FilesList from './FilesList'
 
 export default ({
-  setField,
+  onChange,
   initialValues,
   width = '100%',
   containerStyle,
   inputStyle,
   hideList,
-  maxSize = 100000,
+  accept,
+  maxSize = 10000,
+  elevation = 0,
   text = 'Drag some files here, or click to select files',
   dragActiveText = 'Drop here!',
   unsupportedText = 'Unsupported File...',
-
   ...props
 }) => {
   const [files, setFiles] = useState([])
   const [message, setMessage] = useState(text)
-  // eslint-disable-next-line
-  // Parses a file and returns a promisse that resolves to base64 string.
+  // Parses one file and returns a promisse that resolves to base64 string.
   const parseFile = async file => {
     const reader = new FileReader()
     return new Promise((resolve, reject) => {
@@ -39,11 +40,9 @@ export default ({
   }
 
   useEffect(() => {
-    if (files.length > 0) {
-      const list = files.map(file => file.parsed)
-      const output = list.length > 1 ? list : list[0]
-      setField(output)
-    }
+    const list = files.map(file => file.parsed)
+    // const output = list.length > 1 || multiple ? list : list[0]
+    onChange(list)
     // eslint-disable-next-line
   }, [files])
 
@@ -54,10 +53,11 @@ export default ({
         padding: '10px',
         ...containerStyle,
       }}
-      elevation={1}
+      elevation={elevation}
     >
       <Dropzone
-        maxSize={maxSize}
+        accept={({}, accept)}
+        maxSize={maxSize * 1000}
         onDropRejected={aa => {
           setMessage(unsupportedText)
           setTimeout(() => {
@@ -73,6 +73,7 @@ export default ({
                 name,
                 type,
                 size,
+                id: uniqueId(),
                 parsed: await parseFile(file),
               }
             }),
@@ -103,7 +104,7 @@ export default ({
         )}
       </Dropzone>
 
-      {hideList || <FilesList files={files} />}
+      {hideList || <FilesList files={files} setFiles={setFiles} />}
     </Paper>
   )
 }

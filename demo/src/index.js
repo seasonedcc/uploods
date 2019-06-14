@@ -1,11 +1,10 @@
 import React, { Component } from 'react'
 import { render } from 'react-dom'
-import { CroodsProvider, Fetch, useCroods } from 'croods'
+// import { CroodsProvider, Fetch, useCroods } from 'croods'
 
 import Uplood from '../../src'
 
-const Demo = props => {
-  // const [state, { save }] = useCroods({ name: 'profile' })
+const App = props => {
   return (
     <div
       style={{
@@ -15,21 +14,11 @@ const Demo = props => {
         padding: '30px',
       }}
     >
-      <Uplood setField={value => console.log('field', value)} />
+      <Uplood
+        accept={['image/*']}
+        onChange={files => console.log('files:', files)}
+      />
     </div>
-  )
-}
-
-const App = props => {
-  return (
-    <CroodsProvider
-      debugRequests
-      debugActions
-      baseUrl="https://reqres.in/api/"
-      parseResponse={({ data }) => data.data}
-    >
-      <Demo />
-    </CroodsProvider>
   )
 }
 
