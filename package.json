@@ -1,5 +1,5 @@
 {
-  "name": "uploods",
+  "name": "react-uploods",
   "version": "0.3.0",
   "description": "uploods React component",
   "main": "lib/index.js",
