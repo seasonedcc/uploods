@@ -1,7 +1,5 @@
 import React, { Component } from 'react'
 import { render } from 'react-dom'
-// import { CroodsProvider, Fetch, useCroods } from 'croods'
-
 import Uplood from '../../src'
 
 const App = props => {

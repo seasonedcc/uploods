@@ -21,17 +21,18 @@
   },
   "dependencies": {
     "@material-ui/core": "^4.1.0",
+    "@material-ui/icons": "^4.2.0",
+    "lodash": "^4.17.11",
     "react-dropzone": "^10.1.5"
   },
   "peerDependencies": {
-    "react": "16.x",
-    "croods": "^1.0.8"
+    "react": "16.x"
   },
   "devDependencies": {
+    "eslint-config-seasoned": "^1.0.0",
     "nwb": "0.23.x",
     "react": "^16.8.6",
-    "react-dom": "^16.8.6",
-    "eslint-config-seasoned": "^1.0.0"
+    "react-dom": "^16.8.6"
   },
   "author": "",
   "homepage": "",
