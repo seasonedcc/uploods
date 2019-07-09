@@ -1,28 +1,31 @@
 {
-  "name": "react-uploods",
+  "name": "uploods",
   "version": "0.3.0",
-  "description": "uploods React component",
-  "main": "lib/index.js",
-  "module": "es/index.js",
-  "files": [
-    "css",
-    "es",
-    "lib",
-    "umd"
-  ],
+  "description": "Uploods React component",
+  "author": "SeasonedSoftware",
+  "license": "MIT",
+  "repository": "SeasonedSoftware/uploods",
+  "main": "dist/uploods.cjs.js",
+  "module": "dist/uploods.esm.js",
+  "types": "dist/types/index.d.ts",
   "scripts": {
-    "build": "nwb build-react-component",
-    "clean": "nwb clean-module && nwb clean-demo",
-    "prepublishOnly": "npm run build",
-    "start": "nwb serve-react-demo",
-    "test": "nwb test-react",
-    "test:coverage": "nwb test-react --coverage",
-    "test:watch": "nwb test-react --server"
+    "type-check": "tsc --noEmit",
+    "type-check:watch": "npm run type-check -- --watch",
+    "test": "cross-env CI=1 react-scripts test --env=jsdom",
+    "test:watch": "react-scripts test --env=jsdom",
+    "scaffold": "node ./scripts/scaffold.js",
+    "build": "npm run build:types && npm run build:js",
+    "build:js": "rollup -c",
+    "build:types": "tsc --emitDeclarationOnly",
+    "start": "rollup -c -w",
+    "prepare": "yarn run build",
+    "predeploy": "yarn build && cd example/ && yarn build && cd ../",
+    "deploy": "gh-pages -d example/build"
   },
   "dependencies": {
-    "@material-ui/core": "^4.1.1",
-    "@material-ui/icons": "^4.2.0",
-    "lodash": "^4.17.11",
+    "@material-ui/core": "^4.2.0",
+    "@material-ui/icons": "^4.2.1",
+    "lodash": "^4.17.12",
     "prop-types": "^15.7.2",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
@@ -30,19 +33,37 @@
   },
   "peerDependencies": {
     "lodash": "4.x",
-    "prop-types": "15.x",
-    "react": "16.x",
-    "react-dom": "16.x"
+    "@material-ui/core": "^4.2.0",
+    "@material-ui/icons": "^4.2.1",
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6"
   },
   "devDependencies": {
-    "eslint-config-seasoned": "^1.0.0",
-    "nwb": "0.23.x"
-  },
-  "author": "",
-  "homepage": "",
-  "license": "MIT",
-  "repository": "",
-  "keywords": [
-    "react-component"
-  ]
+    "@babel/core": "^7.5.4",
+    "@babel/plugin-proposal-class-properties": "^7.5.0",
+    "@babel/plugin-proposal-object-rest-spread": "^7.5.4",
+    "@babel/preset-react": "^7.0.0",
+    "@babel/preset-typescript": "^7.3.3",
+    "@material-ui/core": "^4.2.0",
+    "@material-ui/icons": "^4.2.1",
+    "@types/lodash": "^4.14.136",
+    "@types/react": "^16.8.23",
+    "@types/react-dom": "^16.8.4",
+    "cross-env": "^5.2.0",
+    "gh-pages": "^2.0.1",
+    "lodash": "^4.17.12",
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6",
+    "react-scripts": "^3.0.1",
+    "readline-promise": "^1.0.4",
+    "replace-in-file": "^4.1.1",
+    "rollup": "^1.16.7",
+    "rollup-plugin-babel": "^4.3.3",
+    "rollup-plugin-commonjs": "^10.0.1",
+    "rollup-plugin-json": "^4.0.0",
+    "rollup-plugin-node-resolve": "^5.2.0",
+    "rollup-plugin-peer-deps-external": "^2.2.0",
+    "rollup-plugin-postcss": "^2.0.3",
+    "rollup-plugin-uglify": "^6.0.2"
+  }
 }

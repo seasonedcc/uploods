@@ -1,0 +1,29 @@
+{
+  "name": "uploods-example",
+  "homepage": "https://SeasonedSoftware.github.io/uploods",
+  "version": "0.0.0",
+  "license": "MIT",
+  "private": true,
+  "dependencies": {
+    "@material-ui/core": "^4.2.0",
+    "@reach/router": "latest",
+    "uploods": "link:..",
+    "prop-types": "latest",
+    "react": "link:../node_modules/react",
+    "react-dom": "link:../node_modules/react-dom",
+    "react-scripts": "latest",
+    "react-syntax-highlighter": "^11.0.1"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ]
+}
