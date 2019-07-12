@@ -1,4 +1,4 @@
 // @ts-ignore
-import Uploods from './Uploods'
-
-export default Uploods
+export { Uploods } from './Uploods'
+// @ts-ignore
+export { Provider } from './Provider'

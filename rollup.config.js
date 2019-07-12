@@ -18,6 +18,7 @@ const config = {
     '@material-ui/core',
     '@material-ui/icons',
     'lodash',
+    'firebase',
   ],
   plugins: [
     // Allows node_modules resolution

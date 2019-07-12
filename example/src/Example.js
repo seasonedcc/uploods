@@ -1,14 +1,24 @@
-import React, { Fragment, useState } from 'react'
+import React, { useState } from 'react'
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter'
 import prism from 'react-syntax-highlighter/dist/esm/styles/prism/prism'
 import { Card, CardHeader, CardContent } from '@material-ui/core'
 
-import Uploods from 'uploods'
+import { Uploods, Provider } from 'uploods'
+
+const config = {
+  apiKey: 'XXXXXXX',
+  authDomain: 'XXXXXXX',
+  databaseURL: 'XXXXXXX',
+  projectId: 'XXXXXXX',
+  storageBucket: 'XXXXXXX',
+  messagingSenderId: 'XXXXXXX',
+  appId: 'XXXXXXX',
+}
 
 const Example = () => {
   const [files, setFiles] = useState([])
   return (
-    <Fragment>
+    <Provider config={config}>
       <Card elevation={5}>
         <CardHeader title="Accept Images" />
         <CardContent>
@@ -19,10 +29,15 @@ const Example = () => {
               ))}
             </ul>
           )}
-          <Uploods accept={['image/*']} onChange={setFiles} />
+          <Uploods
+            config={config}
+            containerStyle={{ margin: '1rem auto' }}
+            accept={['image/*']}
+            onChange={setFiles}
+          />
         </CardContent>
         <SyntaxHighlighter language="javascript" style={prism}>
-          {`import Uploods from 'seasoned-evaluator'
+          {`import { Uploods } from 'uploods'
 
 // MyComponent
 const [files, setFiles] = useState([])
@@ -36,10 +51,14 @@ const [files, setFiles] = useState([])
       <Card elevation={5}>
         <CardHeader title="Accept PDF" />
         <CardContent>
-          <Uploods accept={['application/pdf']} onChange={() => null} />
+          <Uploods
+            containerStyle={{ margin: '1rem auto' }}
+            accept={['application/pdf']}
+            onChange={() => null}
+          />
         </CardContent>
         <SyntaxHighlighter language="javascript" style={prism}>
-          {`import Uploods from 'seasoned-evaluator'
+          {`import { Uploods } from 'uploods'
 
 // MyComponent
 const [files, setFiles] = useState([])
@@ -50,7 +69,7 @@ const [files, setFiles] = useState([])
 `}
         </SyntaxHighlighter>
       </Card>
-    </Fragment>
+    </Provider>
   )
 }
 
