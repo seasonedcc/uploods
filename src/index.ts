@@ -1,4 +1,3 @@
-// @ts-ignore
-import Uploods from './Uploods'
-
-export default Uploods
+export { Dropzone } from './Dropzone'
+export { Uploods } from './Uploods'
+export { Provider } from './Provider'

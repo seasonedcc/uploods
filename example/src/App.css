@@ -32,6 +32,7 @@ body {
 .App > div {
   display: flex;
   flex: 1;
+  flex-wrap: wrap;
 }
 
 .MuiPaper-root {

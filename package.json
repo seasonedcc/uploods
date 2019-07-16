@@ -1,6 +1,6 @@
 {
   "name": "uploods",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "description": "Uploods React component",
   "author": "SeasonedSoftware",
   "license": "MIT",
@@ -25,6 +25,7 @@
   "dependencies": {
     "@material-ui/core": "^4.2.0",
     "@material-ui/icons": "^4.2.1",
+    "browser-image-resizer": "^2.0.1",
     "lodash": "^4.17.12",
     "prop-types": "^15.7.2",
     "react": "^16.8.6",
@@ -32,9 +33,10 @@
     "react-dropzone": "^10.1.5"
   },
   "peerDependencies": {
-    "lodash": "4.x",
     "@material-ui/core": "^4.2.0",
     "@material-ui/icons": "^4.2.1",
+    "firebase": "^6.3.0",
+    "lodash": "4.x",
     "react": "^16.8.6",
     "react-dom": "^16.8.6"
   },
@@ -50,8 +52,9 @@
     "@types/react": "^16.8.23",
     "@types/react-dom": "^16.8.4",
     "cross-env": "^5.2.0",
+    "firebase": "^6.3.0",
     "gh-pages": "^2.0.1",
-    "lodash": "^4.17.12",
+    "lodash": "^4.17.14",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-scripts": "^3.0.1",
