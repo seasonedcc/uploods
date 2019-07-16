@@ -4,7 +4,7 @@ import { UploodAPIConfig } from './typeDeclarations'
 export const Context = createContext({})
 
 interface ProviderConfig extends UploodAPIConfig {
-  children: React.ElementType
+  children?: any
 }
 
 export const Provider = ({

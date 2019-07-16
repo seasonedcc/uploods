@@ -1,10 +1,8 @@
 import React, { useState } from 'react'
 import map from 'lodash/map'
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter'
-// @ts-ignore
 import prism from 'react-syntax-highlighter/dist/esm/styles/prism/prism'
 import { Card, CardHeader, CardContent } from '@material-ui/core'
-// @ts-ignore
 import { Dropzone, Provider } from 'uploods'
 
 const config = {
