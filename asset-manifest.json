@@ -1,14 +1,14 @@
 {
   "files": {
     "main.css": "/uploods/static/css/main.4041a975.chunk.css",
-    "main.js": "/uploods/static/js/main.14a94771.chunk.js",
-    "main.js.map": "/uploods/static/js/main.14a94771.chunk.js.map",
+    "main.js": "/uploods/static/js/main.47db484e.chunk.js",
+    "main.js.map": "/uploods/static/js/main.47db484e.chunk.js.map",
     "runtime~main.js": "/uploods/static/js/runtime~main.8cbff777.js",
     "runtime~main.js.map": "/uploods/static/js/runtime~main.8cbff777.js.map",
-    "static/js/2.c44d5231.chunk.js": "/uploods/static/js/2.c44d5231.chunk.js",
-    "static/js/2.c44d5231.chunk.js.map": "/uploods/static/js/2.c44d5231.chunk.js.map",
+    "static/js/2.67e7ab8a.chunk.js": "/uploods/static/js/2.67e7ab8a.chunk.js",
+    "static/js/2.67e7ab8a.chunk.js.map": "/uploods/static/js/2.67e7ab8a.chunk.js.map",
     "index.html": "/uploods/index.html",
-    "precache-manifest.3daf8293494ea6edaea4098aa65ac02e.js": "/uploods/precache-manifest.3daf8293494ea6edaea4098aa65ac02e.js",
+    "precache-manifest.6c7ecd5d409eedf0c80e07c099a8a453.js": "/uploods/precache-manifest.6c7ecd5d409eedf0c80e07c099a8a453.js",
     "service-worker.js": "/uploods/service-worker.js",
     "static/css/main.4041a975.chunk.css.map": "/uploods/static/css/main.4041a975.chunk.css.map"
   }
