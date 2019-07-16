@@ -15,6 +15,7 @@ export const DropPicture = ({
   maxSize = 10000,
   maxDimension,
   quality,
+  override,
   wrapperStyle,
   prefix = 'droppicture',
   initialSrc,
@@ -23,13 +24,10 @@ export const DropPicture = ({
   const [file, setFile] = useState()
   const [uploaded, setUploaded] = useState(false)
   const inheritedConfig = useContext(Context)
-  const fireConfig = config || inheritedConfig
-
-  if (!fireConfig || !Object.keys(fireConfig).length) {
-    throw new Error('You must provide a Firebase app config object')
-  }
-
-  const api = useMemo(() => new Uploods(fireConfig as UploodAPIConfig), [])
+  const api = useMemo(
+    () => new Uploods((config || inheritedConfig) as UploodAPIConfig),
+    [],
+  )
 
   const src = file ? file.url || file.parsed : initialSrc
 
@@ -83,7 +81,7 @@ export const DropPicture = ({
       const [file] = accepted
       const uploaded = await api.upload(
         file,
-        { prefix, maxDimension, quality },
+        { prefix, maxDimension, quality, override },
         setFile,
       )
       setFile(uploaded)
@@ -97,6 +95,7 @@ interface DropPictureProps {
   onChange: (t: FileData) => void
   maxSize?: number
   maxDimension?: number
+  override?: boolean
   quality?: number
   prefix?: string
   wrapperStyle?: any

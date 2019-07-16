@@ -1,5 +1,6 @@
 import firebase from 'firebase/app'
 import 'firebase/storage'
+import compact from 'lodash/compact'
 import get from 'lodash/get'
 
 import { getFileData } from './utils'
@@ -16,6 +17,10 @@ export class Uploods {
   storage: firebase.storage.Storage
 
   constructor(config: UploodAPIConfig) {
+    if (!config || Object.keys(config).length !== 2) {
+      throw new Error('You must provide a Firebase app config object')
+    }
+
     if (!firebase.apps.length) firebase.initializeApp(config)
     this.storage = firebase.storage()
   }
@@ -27,9 +32,12 @@ export class Uploods {
   ) => {
     const fileData = await getFileData(file)
     const timeStamp = new Date().getTime().toString()
+    const finalName = config.override
+      ? fileData.name
+      : `${timeStamp}-${fileData.name}`
     const fileToUpload = await this.prepareImage(file, config)
     const storageRef = this.storage.ref()
-    const id = `uploods/${config.prefix || timeStamp}/${file.name}`
+    const id = compact(['uploods', config.prefix, finalName]).join('/')
     const metadata = { contentType: file.type }
     const uploadTask = storageRef.child(id).put(fileToUpload, metadata)
     const result: FileData = await new Promise(resolve =>
@@ -40,7 +48,14 @@ export class Uploods {
             const { bytesTransferred, totalBytes } = snapshot
             const percent = (bytesTransferred / totalBytes) * 100
             const state = get(stateMap, snapshot.state, 'running')
-            progressFn({ ...fileData, id, percent, state, uploadTask })
+            progressFn({
+              ...fileData,
+              name: finalName,
+              id,
+              percent,
+              state,
+              uploadTask,
+            })
           }
         },
         (error: Error) => {

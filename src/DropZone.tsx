@@ -19,6 +19,7 @@ export const DropZone = ({
   accept,
   maxSize = 10000,
   maxDimension,
+  override,
   quality,
   prefix = 'dropzone',
   paperProps = { evelation: 0 },
@@ -30,13 +31,11 @@ export const DropZone = ({
   const [files, setFiles] = useState({})
   const [message, setMessage] = useState(text)
   const inheritedConfig = useContext(Context)
-  const fireConfig = config || inheritedConfig
 
-  if (!fireConfig || !Object.keys(fireConfig).length) {
-    throw new Error('You must provide a Firebase app config object')
-  }
-
-  const api = useMemo(() => new Uploods(fireConfig as UploodAPIConfig), [])
+  const api = useMemo(
+    () => new Uploods((config || inheritedConfig) as UploodAPIConfig),
+    [],
+  )
 
   return (
     <Paper style={{ padding: '10px', ...containerStyle }} {...paperProps}>
@@ -69,7 +68,7 @@ export const DropZone = ({
   async function uploadFiles(accepted: File[]) {
     const uploadedFiles: FileData[] = await Promise.all(
       accepted.map((file: File) =>
-        api.upload(file, { prefix, maxDimension, quality }, setFile),
+        api.upload(file, { prefix, maxDimension, quality, override }, setFile),
       ),
     )
     const parsedFiles = reduce(
@@ -107,6 +106,7 @@ interface DropZoneProps {
   inputStyle?: any
   hideList?: boolean
   accept?: string[]
+  override?: boolean
   quality?: number
   maxSize?: number
   maxDimension?: number
