@@ -1,18 +1,24 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import map from 'lodash/map'
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter'
 import prism from 'react-syntax-highlighter/dist/esm/styles/prism/prism'
 import { Card, CardHeader, CardContent } from '@material-ui/core'
 import { Dropzone, Provider } from 'uploods'
 
-const config = {
-  apiKey: process.env.REACT_APP_API_KEY,
-  storageBucket: process.env.REACT_APP_BUCKET,
-}
-
 const Example = () => {
   const [files, setFiles] = useState()
-  return (
+  const [config, setConfig] = useState({
+    apiKey: process.env.REACT_APP_API_KEY,
+    storageBucket: process.env.REACT_APP_BUCKET,
+  })
+  useEffect(() => {
+    if (!config.apiKey || !config.storageBucket) {
+      const apiKey = prompt('Please enter your Firebase API key')
+      const storageBucket = prompt('Please enter your Storage Bucket')
+      setConfig({ apiKey, storageBucket })
+    }
+  }, [config.apiKey, config.storageBucket])
+  return !config.apiKey || !config.storageBucket ? null : (
     <Provider {...config}>
       <Card elevation={5}>
         <CardHeader title="Accept Images" />
