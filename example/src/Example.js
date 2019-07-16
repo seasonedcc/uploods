@@ -26,7 +26,8 @@ const Example = () => {
           <DropPicture
             initialSrc="https://source.unsplash.com/random/200x200"
             maxDimension={200}
-            onChange={() => console.log('foo')}
+            quality={1}
+            onChange={() => console.log('Uploaded!')}
           />
         </CardContent>
         <SyntaxHighlighter language="javascript" style={prism}>
@@ -36,6 +37,7 @@ const Example = () => {
 const [file, setFile] = useState([])
 <DropPicture
   maxDimension={200}
+  quality={1 /* 0.1-1 */}
   initialSrc="https://source.unsplash.com/random/200x200"
   onChange={setFile}
 />

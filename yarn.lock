@@ -8269,6 +8269,10 @@ schema-utils@^1.0.0:
     ajv-errors "^1.0.0"
     ajv-keywords "^3.1.0"
 
+seasoned-components@^0.1.2:
+  version "0.1.2"
+  resolved "https://registry.yarnpkg.com/seasoned-components/-/seasoned-components-0.1.2.tgz#a62ae19dc2cf3cf4233e100672b43c2f0fe3843a"
+
 select-hose@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/select-hose/-/select-hose-2.0.0.tgz#625d8658f865af43ec962bfc376a37359a4994ca"

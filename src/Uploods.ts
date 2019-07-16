@@ -31,7 +31,6 @@ export class Uploods {
     const storageRef = this.storage.ref()
     const id = `uploods/${config.prefix || timeStamp}/${file.name}`
     const metadata = { contentType: file.type }
-    console.log(file, fileToUpload)
     const uploadTask = storageRef.child(id).put(fileToUpload, metadata)
     const result: FileData = await new Promise(resolve =>
       uploadTask.on(

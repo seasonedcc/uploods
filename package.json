@@ -25,7 +25,8 @@
   "dependencies": {
     "browser-image-resizer": "^2.0.1",
     "prop-types": "^15.7.2",
-    "react-dropzone": "^10.1.5"
+    "react-dropzone": "^10.1.5",
+    "seasoned-components": "^0.1.2"
   },
   "peerDependencies": {
     "@material-ui/core": "^4.2.0",

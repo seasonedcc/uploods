@@ -6,7 +6,7 @@ import PropTypes from 'prop-types'
 import ReactDropzone from 'react-dropzone'
 import { Paper, FormHelperText } from '@material-ui/core'
 import FilesList from './FilesList'
-import dropzoneStyles from './dropzoneStyles'
+import styles from './styles'
 import { Context } from './Provider'
 import { Uploods } from './Uploods'
 import { FileData, FileState, UploodAPIConfig } from './typeDeclarations'
@@ -19,6 +19,7 @@ export const DropZone = ({
   accept,
   maxSize = 10000,
   maxDimension,
+  quality,
   prefix = 'dropzone',
   paperProps = { evelation: 0 },
   text = 'Drag some files here, or click to select files',
@@ -49,7 +50,10 @@ export const DropZone = ({
         onDrop={uploadFiles}
       >
         {({ getRootProps, getInputProps, isDragActive }) => (
-          <div {...getRootProps()} style={{ ...dropzoneStyles, ...inputStyle }}>
+          <div
+            {...getRootProps()}
+            style={{ ...styles.dropzone, ...inputStyle }}
+          >
             <input {...getInputProps()} />
             <FormHelperText error={message === unsupportedText}>
               {isDragActive ? dragActiveText : message}
@@ -65,7 +69,7 @@ export const DropZone = ({
   async function uploadFiles(accepted: File[]) {
     const uploadedFiles: FileData[] = await Promise.all(
       accepted.map((file: File) =>
-        api.upload(file, { prefix, maxDimension }, setFile),
+        api.upload(file, { prefix, maxDimension, quality }, setFile),
       ),
     )
     const parsedFiles = reduce(
@@ -103,6 +107,7 @@ interface DropZoneProps {
   inputStyle?: any
   hideList?: boolean
   accept?: string[]
+  quality?: number
   maxSize?: number
   maxDimension?: number
   paperProps?: any
@@ -119,6 +124,7 @@ DropZone.propTypes = {
   inputStyle: PropTypes.object,
   hideList: PropTypes.bool,
   accept: PropTypes.arrayOf(PropTypes.string),
+  quality: PropTypes.number,
   maxSize: PropTypes.number,
   maxDimension: PropTypes.number,
   paperProps: PropTypes.object,
