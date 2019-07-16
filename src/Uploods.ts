@@ -31,6 +31,7 @@ export class Uploods {
     const storageRef = this.storage.ref()
     const id = `uploods/${config.prefix || timeStamp}/${file.name}`
     const metadata = { contentType: file.type }
+    console.log(file, fileToUpload)
     const uploadTask = storageRef.child(id).put(fileToUpload, metadata)
     const result: FileData = await new Promise(resolve =>
       uploadTask.on(
@@ -69,13 +70,14 @@ export class Uploods {
     return result
   }
 
-  prepareImage = async (
-    file: File,
-    { maxWidth, maxHeight, quality }: ImageConfig,
-  ) => {
+  prepareImage = async (file: File, { maxDimension, quality }: ImageConfig) => {
     const [typePrefix] = file.type.split('/')
-    if (typePrefix === 'image' && (maxWidth || maxHeight || quality)) {
-      const config = { maxWidth, maxHeight, quality }
+    if (typePrefix === 'image' && (maxDimension || quality)) {
+      const config = {
+        maxWidth: maxDimension,
+        maxHeight: maxDimension,
+        quality,
+      }
       const image = await readAndCompressImage(file, config)
       return image
     }

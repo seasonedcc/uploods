@@ -10,24 +10,22 @@ import dropzoneStyles from './dropzoneStyles'
 import { Context } from './Provider'
 import { Uploods } from './Uploods'
 import { FileData, FileState, UploodAPIConfig } from './typeDeclarations'
-import { Style } from 'jss'
 
-export const Dropzone = ({
+export const DropZone = ({
   onChange,
   containerStyle,
   inputStyle,
   hideList,
   accept,
   maxSize = 10000,
-  maxWidth,
-  maxHeight,
+  maxDimension,
   prefix = 'dropzone',
   paperProps = { evelation: 0 },
   text = 'Drag some files here, or click to select files',
   config,
   dragActiveText = 'Drop here!',
   unsupportedText = 'Unsupported File...',
-}: DropzoneProps) => {
+}: DropZoneProps) => {
   const [files, setFiles] = useState({})
   const [message, setMessage] = useState(text)
   const inheritedConfig = useContext(Context)
@@ -67,7 +65,7 @@ export const Dropzone = ({
   async function uploadFiles(accepted: File[]) {
     const uploadedFiles: FileData[] = await Promise.all(
       accepted.map((file: File) =>
-        api.upload(file, { prefix, maxWidth, maxHeight }, setFile),
+        api.upload(file, { prefix, maxDimension }, setFile),
       ),
     )
     const parsedFiles = reduce(
@@ -99,15 +97,14 @@ export const Dropzone = ({
   }
 }
 
-interface DropzoneProps {
+interface DropZoneProps {
   onChange: (t: FileData[]) => void
-  containerStyle?: Style
-  inputStyle?: Style
+  containerStyle?: any
+  inputStyle?: any
   hideList?: boolean
   accept?: string[]
   maxSize?: number
-  maxHeight?: number
-  maxWidth?: number
+  maxDimension?: number
   paperProps?: any
   prefix?: string
   text?: string
@@ -116,15 +113,14 @@ interface DropzoneProps {
   config?: UploodAPIConfig
 }
 
-Dropzone.propTypes = {
+DropZone.propTypes = {
   onChange: PropTypes.func.isRequired,
   containerStyle: PropTypes.object,
   inputStyle: PropTypes.object,
   hideList: PropTypes.bool,
   accept: PropTypes.arrayOf(PropTypes.string),
   maxSize: PropTypes.number,
-  maxWidth: PropTypes.number,
-  maxHeight: PropTypes.number,
+  maxDimension: PropTypes.number,
   paperProps: PropTypes.object,
   config: PropTypes.object,
   text: PropTypes.string,

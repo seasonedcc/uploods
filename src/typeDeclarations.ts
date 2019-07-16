@@ -5,8 +5,7 @@ export interface UploodAPIConfig {
 
 export interface ImageConfig {
   prefix?: string
-  maxWidth?: number
-  maxHeight?: number
+  maxDimension?: number
   quality?: number
 }
 

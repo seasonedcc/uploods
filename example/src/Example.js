@@ -3,7 +3,7 @@ import map from 'lodash/map'
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter'
 import prism from 'react-syntax-highlighter/dist/esm/styles/prism/prism'
 import { Card, CardHeader, CardContent } from '@material-ui/core'
-import { Dropzone, Provider } from 'uploods'
+import { DropZone, Provider, DropPicture } from 'uploods'
 
 const Example = () => {
   const [files, setFiles] = useState()
@@ -21,7 +21,29 @@ const Example = () => {
   return !config.apiKey || !config.storageBucket ? null : (
     <Provider {...config}>
       <Card elevation={5}>
-        <CardHeader title="Accept Images" />
+        <CardHeader title="DropPicture" />
+        <CardContent>
+          <DropPicture
+            initialSrc="https://source.unsplash.com/random/200x200"
+            maxDimension={200}
+            onChange={() => console.log('foo')}
+          />
+        </CardContent>
+        <SyntaxHighlighter language="javascript" style={prism}>
+          {`import { DropPicture } from 'uploods'
+
+// MyComponent
+const [file, setFile] = useState([])
+<DropPicture
+  maxDimension={200}
+  initialSrc="https://source.unsplash.com/random/200x200"
+  onChange={setFile}
+/>
+`}
+        </SyntaxHighlighter>
+      </Card>
+      <Card elevation={5}>
+        <CardHeader title="DropZone Accept Images" />
         <CardContent>
           {files && !!Object.keys(files).length && (
             <ul style={{ margin: 0, paddingLeft: 20 }}>
@@ -30,19 +52,18 @@ const Example = () => {
               ))}
             </ul>
           )}
-          <Dropzone
-            config={config}
+          <DropZone
             containerStyle={{ margin: '1rem auto' }}
             accept={['image/*']}
             onChange={setFiles}
           />
         </CardContent>
         <SyntaxHighlighter language="javascript" style={prism}>
-          {`import { Dropzone } from 'uploods'
+          {`import { DropZone } from 'uploods'
 
 // MyComponent
 const [files, setFiles] = useState([])
-<Dropzone
+<DropZone
   accept={['image/*']}
   onChange={setFiles}
 />
@@ -50,20 +71,20 @@ const [files, setFiles] = useState([])
         </SyntaxHighlighter>
       </Card>
       <Card elevation={5}>
-        <CardHeader title="Accept PDF" />
+        <CardHeader title="DropZone Accept PDF" />
         <CardContent>
-          <Dropzone
+          <DropZone
             containerStyle={{ margin: '1rem auto' }}
             accept={['application/pdf']}
             onChange={() => null}
           />
         </CardContent>
         <SyntaxHighlighter language="javascript" style={prism}>
-          {`import { Dropzone } from 'uploods'
+          {`import { DropZone } from 'uploods'
 
 // MyComponent
 const [files, setFiles] = useState([])
-<Dropzone
+<DropZone
   accept={['application/pdf']}
   onChange={setFiles}
 />
@@ -76,18 +97,18 @@ const [files, setFiles] = useState([])
           <p>You must provide some firebase basic configuration</p>
         </CardContent>
         <SyntaxHighlighter language="javascript" style={prism}>
-          {`import { Dropzone, Provider } from 'uploods'
+          {`import { DropZone, Provider } from 'uploods'
 
 // With a provider
 <Provider
   storageBucket="MyFirebaseBucket"
   apiKey="MyFirebaseAPIKey"
 >
-  <Dropzone ... />
+  <DropZone ... />
 </Provider>
 
-// Or in the Dropzone call
-<Dropzone config={{ apiKey, storageBucket }} ... />
+// Or in the DropZone call
+<DropZone config={{ apiKey, storageBucket }} ... />
 `}
         </SyntaxHighlighter>
       </Card>
@@ -110,8 +131,7 @@ api.upload(myFile).then(fileData =>
 
 // If you want to resize images before uploading
 api.upload(myFile, {
-  maxWidth: 400,
-  maxHeight: 400,
+  maxDimension: 400,
   quality: .4,
 }).then(/* ... */)
 
