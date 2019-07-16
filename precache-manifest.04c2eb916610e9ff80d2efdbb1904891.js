@@ -1,10 +1,10 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "73ac15f0e6def7d79551a3e503e404f2",
+    "revision": "5043d7ab678c98334ffe39dfdd6bdbef",
     "url": "/uploods/index.html"
   },
   {
-    "revision": "afd441c548c015c75cc5",
+    "revision": "305ff4d1f9b8593692d3",
     "url": "/uploods/static/css/main.4041a975.chunk.css"
   },
   {
@@ -12,8 +12,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/uploods/static/js/2.17f0a218.chunk.js"
   },
   {
-    "revision": "afd441c548c015c75cc5",
-    "url": "/uploods/static/js/main.a724010d.chunk.js"
+    "revision": "305ff4d1f9b8593692d3",
+    "url": "/uploods/static/js/main.7b03a70a.chunk.js"
   },
   {
     "revision": "c2ba4c5bdebf2871fe1b",
