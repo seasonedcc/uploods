@@ -1,4 +1,3 @@
-// @ts-ignore
+export { Dropzone } from './Dropzone'
 export { Uploods } from './Uploods'
-// @ts-ignore
 export { Provider } from './Provider'

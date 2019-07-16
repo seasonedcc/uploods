@@ -1246,6 +1246,12 @@
   version "1.5.2"
   resolved "https://registry.yarnpkg.com/@types/q/-/q-1.5.2.tgz#690a1475b84f2a884fd07cd797c00f5f31356ea8"
 
+"@types/react-syntax-highlighter@^10.2.1":
+  version "10.2.1"
+  resolved "https://registry.yarnpkg.com/@types/react-syntax-highlighter/-/react-syntax-highlighter-10.2.1.tgz#b0f75c22cbe7d12104581648348d91d3cd7f13fa"
+  dependencies:
+    "@types/react" "*"
+
 "@types/react-transition-group@^2.0.16":
   version "2.9.2"
   resolved "https://registry.yarnpkg.com/@types/react-transition-group/-/react-transition-group-2.9.2.tgz#c48cf2a11977c8b4ff539a1c91d259eaa627028d"
@@ -1981,6 +1987,10 @@ braces@^2.3.1, braces@^2.3.2:
 brorand@^1.0.1:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/brorand/-/brorand-1.1.0.tgz#12c25efe40a45e3c323eb8675a0a0ce57b22371f"
+
+browser-image-resizer@^2.0.1:
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/browser-image-resizer/-/browser-image-resizer-2.0.1.tgz#86bb32c15ad1f19cff4724b5c100ac2878450654"
 
 browser-process-hrtime@^0.1.2:
   version "0.1.3"
@@ -7269,13 +7279,8 @@ react-dev-utils@^9.0.1:
     text-table "0.2.0"
 
 react-dom@^16.8.6:
-  version "16.8.6"
-  resolved "https://registry.yarnpkg.com/react-dom/-/react-dom-16.8.6.tgz#71d6303f631e8b0097f56165ef608f051ff6e10f"
-  dependencies:
-    loose-envify "^1.1.0"
-    object-assign "^4.1.1"
-    prop-types "^15.6.2"
-    scheduler "^0.13.6"
+  version "0.0.0"
+  uid ""
 
 "react-dom@link:../node_modules/react-dom":
   version "0.0.0"
@@ -7380,13 +7385,8 @@ react-transition-group@^4.0.0:
     prop-types "^15.6.2"
 
 react@^16.8.6:
-  version "16.8.6"
-  resolved "https://registry.yarnpkg.com/react/-/react-16.8.6.tgz#ad6c3a9614fd3a4e9ef51117f54d888da01f2bbe"
-  dependencies:
-    loose-envify "^1.1.0"
-    object-assign "^4.1.1"
-    prop-types "^15.6.2"
-    scheduler "^0.13.6"
+  version "0.0.0"
+  uid ""
 
 "react@link:../node_modules/react":
   version "0.0.0"
@@ -8540,6 +8540,10 @@ type-is@~1.6.17, type-is@~1.6.18:
 typedarray@^0.0.6:
   version "0.0.6"
   resolved "https://registry.yarnpkg.com/typedarray/-/typedarray-0.0.6.tgz#867ac74e3864187b1d3d47d996a78ec5c8830777"
+
+typescript@^3.5.3:
+  version "3.5.3"
+  resolved "https://registry.yarnpkg.com/typescript/-/typescript-3.5.3.tgz#c830f657f93f1ea846819e929092f5fe5983e977"
 
 ua-parser-js@^0.7.18:
   version "0.7.20"
