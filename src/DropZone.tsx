@@ -19,7 +19,7 @@ export const DropZone = ({
   accept,
   maxSize = 10000,
   maxDimension,
-  override,
+  overwrite,
   quality,
   prefix = 'dropzone',
   paperProps = { evelation: 0 },
@@ -68,7 +68,7 @@ export const DropZone = ({
   async function uploadFiles(accepted: File[]) {
     const uploadedFiles: FileData[] = await Promise.all(
       accepted.map((file: File) =>
-        api.upload(file, { prefix, maxDimension, quality, override }, setFile),
+        api.upload(file, { prefix, maxDimension, quality, overwrite }, setFile),
       ),
     )
     const parsedFiles = reduce(
@@ -106,7 +106,7 @@ interface DropZoneProps {
   inputStyle?: any
   hideList?: boolean
   accept?: string[]
-  override?: boolean
+  overwrite?: boolean
   quality?: number
   maxSize?: number
   maxDimension?: number

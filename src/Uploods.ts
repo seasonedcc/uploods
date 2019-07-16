@@ -32,7 +32,7 @@ export class Uploods {
   ) => {
     const fileData = await getFileData(file)
     const timeStamp = new Date().getTime().toString()
-    const finalName = config.override
+    const finalName = config.overwrite
       ? fileData.name
       : `${timeStamp}-${fileData.name}`
     const fileToUpload = await this.prepareImage(file, config)

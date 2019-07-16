@@ -7,7 +7,7 @@ export interface ImageConfig {
   prefix?: string
   maxDimension?: number
   quality?: number
-  override?: boolean
+  overwrite?: boolean
 }
 
 export interface FileData {

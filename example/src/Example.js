@@ -24,7 +24,7 @@ const Example = () => {
         <CardHeader title="DropPicture" />
         <CardContent>
           <DropPicture
-            override
+            overwrite
             initialSrc="https://source.unsplash.com/random/200x200"
             maxDimension={200}
             quality={1}
@@ -37,7 +37,7 @@ const Example = () => {
 // MyComponent
 const [file, setFile] = useState([])
 <DropPicture
-  override
+  overwrite
   maxDimension={200}
   quality={1 /* 0.1-1 */}
   initialSrc="https://source.unsplash.com/random/200x200"
@@ -47,7 +47,7 @@ const [file, setFile] = useState([])
         </SyntaxHighlighter>
       </Card>
       <Card elevation={5}>
-        <CardHeader title="DropZone Accept Images and override equal" />
+        <CardHeader title="DropZone Accept Images and overwrite equal" />
         <CardContent>
           {files && !!Object.keys(files).length && (
             <ul style={{ margin: 0, paddingLeft: 20 }}>
@@ -58,7 +58,7 @@ const [file, setFile] = useState([])
           )}
           <DropZone
             containerStyle={{ margin: '1rem auto' }}
-            override
+            overwrite
             accept={['image/*']}
             onChange={setFiles}
           />
@@ -69,7 +69,7 @@ const [file, setFile] = useState([])
 // MyComponent
 const [files, setFiles] = useState([])
 <DropZone
-  override
+  overwrite
   accept={['image/*']}
   onChange={setFiles}
 />

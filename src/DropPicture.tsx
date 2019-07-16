@@ -15,7 +15,7 @@ export const DropPicture = ({
   maxSize = 10000,
   maxDimension,
   quality,
-  override,
+  overwrite,
   wrapperStyle,
   prefix = 'droppicture',
   initialSrc,
@@ -81,7 +81,7 @@ export const DropPicture = ({
       const [file] = accepted
       const uploaded = await api.upload(
         file,
-        { prefix, maxDimension, quality, override },
+        { prefix, maxDimension, quality, overwrite },
         setFile,
       )
       setFile(uploaded)
@@ -95,7 +95,7 @@ interface DropPictureProps {
   onChange: (t: FileData) => void
   maxSize?: number
   maxDimension?: number
-  override?: boolean
+  overwrite?: boolean
   quality?: number
   prefix?: string
   wrapperStyle?: any
