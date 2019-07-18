@@ -5,7 +5,7 @@
   "license": "MIT",
   "private": true,
   "dependencies": {
-    "@material-ui/core": "^4.2.0",
+    "@material-ui/core": "link:../node_modules/@material-ui/core",
     "@reach/router": "latest",
     "@types/react-syntax-highlighter": "^10.2.1",
     "prop-types": "latest",
