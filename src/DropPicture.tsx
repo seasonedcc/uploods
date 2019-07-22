@@ -5,7 +5,8 @@ import ReactDropzone from 'react-dropzone'
 import { Context } from './Provider'
 import { Uploods } from './Uploods'
 import styles from './styles'
-import { LinearGradientWrap, Countdown } from 'seasoned-components'
+// @ts-ignore
+import { LinearGradient, Countdown } from '@seasonedsoftware/utils/dist/ui'
 import { FileData, UploodAPIConfig } from './typeDeclarations'
 
 const gradientColors = [1, 0.5, 0.1, 0, 0].map(n => `rgba(0,0,0,${n})`)
@@ -54,9 +55,9 @@ export const DropPicture = ({
             src={src}
             className={isDragActive ? 'active' : 'active'}
           />
-          <LinearGradientWrap deg={0} colors={gradientColors}>
+          <LinearGradient deg={0} colors={gradientColors}>
             <div style={styles.pictureGradient} />
-          </LinearGradientWrap>
+          </LinearGradient>
           {uploaded ? (
             <>
               <Countdown active time={3} onFinish={() => setUploaded(false)} />

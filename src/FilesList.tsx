@@ -13,8 +13,9 @@ import {
   ListItemText,
 } from '@material-ui/core'
 import { RemoveCircle, PictureAsPdf, InsertDriveFile } from '@material-ui/icons'
-
-import { humanizeBytes, clipName } from './utils'
+// @ts-ignore
+import { clipString } from '@seasonedsoftware/utils/dist/helpers'
+import { humanizeBytes } from './utils'
 import { FileState, FileData } from './typeDeclarations'
 
 // TODO: preview for non images (icon)
@@ -46,7 +47,7 @@ const FileItem = ({ file, onClick }: ItemProps) => (
     <FilePreview {...file} />
     {file.state === 'done' ? (
       <ListItemText
-        primary={clipName(file.name)}
+        primary={clipString(file.name, 35)}
         secondary={humanizeBytes(file.size)}
       />
     ) : (

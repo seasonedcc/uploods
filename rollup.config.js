@@ -17,6 +17,7 @@ const config = {
     'react-dom',
     '@material-ui/core',
     '@material-ui/icons',
+    '@seasonedsoftware/utils',
     'lodash',
     'firebase',
   ],

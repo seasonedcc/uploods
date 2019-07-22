@@ -5,8 +5,8 @@
   "author": "SeasonedSoftware",
   "license": "MIT",
   "repository": "SeasonedSoftware/uploods",
-  "main": "dist/uploods.cjs.js",
-  "module": "dist/uploods.esm.js",
+  "main": "dist/index.cjs.js",
+  "module": "dist/index.esm.js",
   "types": "dist/types/index.d.ts",
   "scripts": {
     "type-check": "tsc --noEmit",
@@ -25,14 +25,14 @@
   "dependencies": {
     "browser-image-resizer": "^2.0.1",
     "prop-types": "^15.7.2",
-    "react-dropzone": "^10.1.5",
-    "seasoned-components": "^0.1.3"
+    "react-dropzone": "^10.1.5"
   },
   "peerDependencies": {
     "@material-ui/core": "^4.2.1",
     "@material-ui/icons": "^4.2.1",
-    "firebase": "^6.3.0",
-    "lodash": "4.17.14",
+    "@seasonedsoftware/utils": "^0.0.2",
+    "firebase": "^6.3.1",
+    "lodash": "4.17.15",
     "react": "^16.8.6",
     "react-dom": "^16.8.6"
   },
@@ -40,10 +40,12 @@
     "@babel/core": "^7.5.5",
     "@babel/plugin-proposal-class-properties": "^7.5.5",
     "@babel/plugin-proposal-object-rest-spread": "^7.5.5",
+    "@babel/preset-env": "^7.5.5",
     "@babel/preset-react": "^7.0.0",
     "@babel/preset-typescript": "^7.3.3",
     "@material-ui/core": "^4.2.1",
     "@material-ui/icons": "^4.2.1",
+    "@seasonedsoftware/utils": "^0.0.2",
     "@types/lodash": "^4.14.136",
     "@types/react": "^16.8.23",
     "@types/react-dom": "^16.8.4",
