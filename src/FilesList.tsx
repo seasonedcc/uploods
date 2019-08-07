@@ -18,7 +18,6 @@ import { clipString } from '@seasonedsoftware/utils/dist/helpers'
 import { humanizeBytes } from './utils'
 import { FileState, FileData } from './typeDeclarations'
 
-// TODO: preview for non images (icon)
 const FilePreview = ({ type, parsed }: FileData) => {
   const [prefix] = type.split('/')
 
