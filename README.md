@@ -1,17 +1,10 @@
 # uploods
 
-[![Travis][build-badge]][build]
-[![npm package][npm-badge]][npm]
-[![Coveralls][coveralls-badge]][coveralls]
+[![Maintainability](https://api.codeclimate.com/v1/badges/18fbd22734bcc645f72b/maintainability)](https://codeclimate.com/github/SeasonedSoftware/uploods/maintainability)
+[![Test Coverage](https://api.codeclimate.com/v1/badges/18fbd22734bcc645f72b/test_coverage)](https://codeclimate.com/github/SeasonedSoftware/uploods/test_coverage)
+![npm bundle size](https://img.shields.io/bundlephobia/min/uploods)
 
 Describe uploods here.
-
-[build-badge]: https://img.shields.io/travis/user/repo/master.png?style=flat-square
-[build]: https://travis-ci.org/user/repo
-[npm-badge]: https://img.shields.io/npm/v/npm-package.png?style=flat-square
-[npm]: https://www.npmjs.org/package/npm-package
-[coveralls-badge]: https://img.shields.io/coveralls/user/repo/master.png?style=flat-square
-[coveralls]: https://coveralls.io/github/user/repo
 
 | Property                            |  Type  | Required |                     Default                     |
 | ----------------------------------- | :----: | :------: | :---------------------------------------------: |
