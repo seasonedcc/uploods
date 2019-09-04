@@ -39,7 +39,7 @@ const FileItem = ({ file, onClick }) => (
     />
     <ListItemSecondaryAction>
       <IconButton edge="end" aria-label="Remove" onClick={onClick}>
-        <RemoveIcon color="secondary" />
+        <RemoveIcon color="error" />
       </IconButton>
     </ListItemSecondaryAction>
   </ListItem>
