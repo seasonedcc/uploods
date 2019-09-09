@@ -21,7 +21,10 @@
     "start": "rollup -c -w",
     "prepare": "yarn run build",
     "predeploy": "yarn build && cd example/ && yarn build && cd ../",
-    "deploy": "gh-pages -d example/build"
+    "deploy": "gh-pages -d example/build",
+    "release:login": "npm adduser",
+    "release": "npm version",
+    "postrelease": "npm publish && git push --tags && git push"
   },
   "dependencies": {
     "browser-image-resizer": "^2.0.1",
