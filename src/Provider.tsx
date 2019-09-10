@@ -8,11 +8,10 @@ interface ProviderConfig extends UploodAPIConfig {
 }
 
 export const Provider = ({
-  apiKey,
-  storageBucket,
   children,
+  ...props
 }: ProviderConfig) => (
-  <Context.Provider value={{ apiKey, storageBucket }}>
+  <Context.Provider value={{ ...props }}>
     {children}
   </Context.Provider>
 )

@@ -1,6 +1,8 @@
 export interface UploodAPIConfig {
-  apiKey: string
-  storageBucket: string
+  apiKey?: string
+  storageBucket?: string
+  mode: string
+  send?: (...args: any[]) => null | any
 }
 
 export interface ImageConfig {
@@ -25,3 +27,11 @@ export interface FileData {
 }
 
 export type FileState = { [key: string]: FileData }
+
+export type Uploader = {
+  upload: (
+    file: File,
+    config: ImageConfig,
+    progressFn?: (t: FileData) => void,
+  ) => Promise<FileData>
+}
