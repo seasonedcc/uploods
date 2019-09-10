@@ -15,11 +15,11 @@ export class FirebaseUploader implements Uploader{
   storage: firebase.storage.Storage
 
   constructor(config: UploodAPIConfig) {
-    if (!config || Object.keys(config).length !== 2) {
+    if (!config){
       throw new Error('You must provide a Firebase app config object')
     }
-
-    if (!firebase.apps.length) firebase.initializeApp(config)
+    const {apiKey, storageBucket} = config
+    if (!firebase.apps.length) firebase.initializeApp({apiKey, storageBucket})
     this.storage = firebase.storage()
   }
 

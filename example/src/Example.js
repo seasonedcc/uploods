@@ -10,14 +10,15 @@ const Example = () => {
   const [config, setConfig] = useState({
     apiKey: process.env.REACT_APP_API_KEY,
     storageBucket: process.env.REACT_APP_BUCKET,
+    mode: 'firebase',
   })
   useEffect(() => {
     if (!config.apiKey || !config.storageBucket) {
       const apiKey = prompt('Please enter your Firebase API key')
       const storageBucket = prompt('Please enter your Storage Bucket')
-      setConfig({ apiKey, storageBucket })
+      setConfig({ ...config, apiKey, storageBucket })
     }
-  }, [config.apiKey, config.storageBucket])
+  }, [config])
   return !config.apiKey || !config.storageBucket ? null : (
     <Provider {...config}>
       <Card elevation={5}>

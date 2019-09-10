@@ -7,7 +7,7 @@ import { Uploods } from './Uploods'
 import styles from './styles'
 // @ts-ignore
 import { LinearGradient, Countdown } from '@seasonedsoftware/utils/dist/ui'
-import { FileData, UploodAPIConfig } from './typeDeclarations'
+import { UploodAPIConfig, FileData } from './typeDeclarations'
 
 const gradientColors = [1, 0.5, 0.1, 0, 0].map(n => `rgba(0,0,0,${n})`)
 

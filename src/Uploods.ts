@@ -22,6 +22,6 @@ export class Uploods {
     config: ImageConfig = {},
     progressFn?: (t: FileData) => void,
   ) => {
-    this.uploader.upload(file, config, progressFn)
+    return this.uploader.upload(file, config, progressFn)
   }
 }

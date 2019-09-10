@@ -30,7 +30,7 @@ export class ApiUploader implements Uploader {
     const fileToUpload = await toBase64(await prepareImage(file, config))
     const id = compact(['uploods', config.prefix, finalName]).join('/')
 
-    const result: FileData = await axios.post(this.url, {
+    const res = await axios.post(this.url, {
       id,
       name: finalName,
       data: fileToUpload,
@@ -42,15 +42,16 @@ export class ApiUploader implements Uploader {
             ...fileData,
             name: finalName,
             id,
-            percent: progressEvent.loaded,
+            percent: parseInt(`${progressEvent.loaded/progressEvent.total * 100}`, 10),
             state: 'running',
             uploadTask: null,
             type: file.type,
           })
         }
       }
-    }).then(() => 
-      ({
+    })
+
+    const result: FileData = {
         ...fileData,
         name: finalName,
         id,
@@ -58,12 +59,13 @@ export class ApiUploader implements Uploader {
         state: 'done',
         uploadTask: null,
         type: file.type,
-      })
-    )
-    .catch((error: any) => {
-      console.log(error)
-    })
+    }
 
-    return result
+    return new Promise<FileData>((resolve, reject) => {
+      if(res.status >= 200 && res.status < 300){
+        return resolve(result)
+      }
+      return reject('Upload failed')
+    })
   }
 }
