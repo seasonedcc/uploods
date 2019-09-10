@@ -3,15 +3,13 @@ import 'firebase/storage'
 import compact from 'lodash/compact'
 import get from 'lodash/get'
 
-import { getFileData } from './utils'
+import { getFileData, prepareImage } from './utils'
 import { UploodAPIConfig, ImageConfig, FileData } from './typeDeclarations'
 
 const stateMap = {
   [firebase.storage.TaskState.PAUSED]: 'paused',
   [firebase.storage.TaskState.RUNNING]: 'running',
 }
-
-const { readAndCompressImage } = require('browser-image-resizer')
 
 export class Uploods {
   storage: firebase.storage.Storage
@@ -35,10 +33,11 @@ export class Uploods {
     const finalName = config.overwrite
       ? fileData.name
       : `${timeStamp}-${fileData.name}`
-    const fileToUpload = await this.prepareImage(file, config)
-    const storageRef = this.storage.ref()
+    const fileToUpload = await prepareImage(file, config)
     const id = compact(['uploods', config.prefix, finalName]).join('/')
     const metadata = { contentType: file.type }
+
+    const storageRef = this.storage.ref()
     const uploadTask = storageRef.child(id).put(fileToUpload, metadata)
     const result: FileData = await new Promise(resolve =>
       uploadTask.on(
@@ -82,19 +81,5 @@ export class Uploods {
       ),
     )
     return result
-  }
-
-  prepareImage = async (file: File, { maxDimension, quality }: ImageConfig) => {
-    const [typePrefix] = file.type.split('/')
-    if (typePrefix === 'image' && (maxDimension || quality)) {
-      const config = {
-        maxWidth: maxDimension,
-        maxHeight: maxDimension,
-        quality,
-      }
-      const image = await readAndCompressImage(file, config)
-      return image
-    }
-    return file
   }
 }
