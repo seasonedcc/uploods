@@ -12,7 +12,7 @@ export class Uploods {
 
   constructor(config: UploodAPIConfig) {
     this.uploader =
-      config.mode === 'firebase'
+      config.mode && config.mode === 'firebase'
         ? new FirebaseUploader(config)
         : new ApiUploader(config)
   }

@@ -1,6 +1,8 @@
 import compact from 'lodash/compact'
 
-import { getFileData, prepareImage } from './utils'
+const axios = require('axios')
+
+import { getFileData, prepareImage, toBase64 } from './utils'
 import {
   UploodAPIConfig,
   ImageConfig,
@@ -9,10 +11,10 @@ import {
 } from './typeDeclarations'
 
 export class ApiUploader implements Uploader {
-  send: ((...args: any[]) => null | any) | undefined
+  url: string | undefined
 
   constructor(config: UploodAPIConfig) {
-    this.send = config.send
+    this.url = config.url
   }
 
   upload = async (
@@ -25,19 +27,43 @@ export class ApiUploader implements Uploader {
     const finalName = config.overwrite
       ? fileData.name
       : `${timeStamp}-${fileData.name}`
-    const fileToUpload = await prepareImage(file, config)
+    const fileToUpload = await toBase64(await prepareImage(file, config))
     const id = compact(['uploods', config.prefix, finalName]).join('/')
-    const metadata = { contentType: file.type }
-    const result: FileData = await new Promise(resolve => {
-      resolve({
+
+    const result: FileData = await axios.post(this.url, {
+      id,
+      name: finalName,
+      data: fileToUpload,
+    },
+    {
+      onUploadProgress: (progressEvent: any) => {
+        if (typeof progressFn === 'function') {
+          progressFn({
+            ...fileData,
+            name: finalName,
+            id,
+            percent: progressEvent.loaded,
+            state: 'running',
+            uploadTask: null,
+            type: file.type,
+          })
+        }
+      }
+    }).then(() => 
+      ({
+        ...fileData,
         name: finalName,
         id,
-        percent: 0,
-        state: 'running',
+        percent: 100,
+        state: 'done',
         uploadTask: null,
         type: file.type,
       })
+    )
+    .catch((error: any) => {
+      console.log(error)
     })
+
     return result
   }
 }

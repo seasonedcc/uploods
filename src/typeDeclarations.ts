@@ -2,7 +2,7 @@ export interface UploodAPIConfig {
   apiKey?: string
   storageBucket?: string
   mode: string
-  send?: (...args: any[]) => null | any
+  url?: string
 }
 
 export interface ImageConfig {
