@@ -5,16 +5,16 @@ import {
   Uploader,
 } from './typeDeclarations'
 import { FirebaseUploader } from './FirebaseUploader'
-import { ApiUploader } from './ApiUploader'
+import { NonUploader } from './NonUploader'
 
 export class Uploods {
   uploader: Uploader
 
   constructor(config: UploodAPIConfig) {
     this.uploader =
-      config.mode && config.mode === 'firebase'
+      config && config.firebase
         ? new FirebaseUploader(config)
-        : new ApiUploader(config)
+        : new NonUploader()
   }
 
   upload = async (

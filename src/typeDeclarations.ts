@@ -1,8 +1,7 @@
 export interface UploodAPIConfig {
   apiKey?: string
   storageBucket?: string
-  mode: string
-  url?: string
+  firebase: boolean
 }
 
 export interface ImageConfig {
