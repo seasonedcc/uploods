@@ -11,10 +11,9 @@ export class Uploods {
   uploader: Uploader
 
   constructor(config: UploodAPIConfig) {
-    this.uploader =
-      config && config.firebase
-        ? new FirebaseUploader(config)
-        : new NonUploader()
+    this.uploader = config.firebase
+      ? new FirebaseUploader(config)
+      : new NonUploader()
   }
 
   upload = async (
