@@ -1,7 +1,7 @@
 export interface UploodAPIConfig {
   apiKey?: string
   storageBucket?: string
-  firebase: boolean
+  autoUpload: boolean
 }
 
 export interface ImageConfig {
