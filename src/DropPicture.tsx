@@ -80,7 +80,7 @@ export const DropPicture = ({
   async function uploadFiles(accepted: File[]) {
     if (accepted.length) {
       const [file] = accepted
-      const uploaded = await api.upload(
+      const uploaded = await api.process(
         file,
         { prefix, maxDimension, quality, overwrite },
         setFile,

@@ -68,7 +68,7 @@ export const DropZone = ({
   async function uploadFiles(accepted: File[]) {
     const uploadedFiles: FileData[] = await Promise.all(
       accepted.map((file: File) =>
-        api.upload(file, { prefix, maxDimension, quality, overwrite }, setFile),
+        api.process(file, { prefix, maxDimension, quality, overwrite }, setFile),
       ),
     )
     const parsedFiles = reduce(
