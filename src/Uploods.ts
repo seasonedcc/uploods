@@ -18,16 +18,18 @@ export class Uploods {
     file: File,
     config: ImageConfig = {},
     progressFn?: (t: FileData) => void,
-  ) => {
-    if (this.uploader) return this.uploader.upload(file, config, progressFn)
-    const { fileToUpload, ...fileData } = await processFile(file, config)
+  ): Promise<FileData> => {
+    const processedFile = await processFile(file, config)
+
+    if (this.uploader) return this.uploader.upload(processedFile, progressFn)
+
+    const { fileToUpload, ...fileData } = processedFile
     const result: FileData = {
       ...fileData,
       percent: 100,
       state: 'done',
       uploadTask: null,
     }
-
     return new Promise<FileData>(resolve => {
       return resolve(result)
     })

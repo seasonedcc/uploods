@@ -49,6 +49,10 @@ it('calls uploadTask', async () => {
   }
 
   const uploader = new FirebaseUploader(config)
-  await uploader.upload({ type: 'foo', name: 'foo' }, {}, () => 'progress')
+  await uploader.upload(
+    { type: 'foo', name: 'foo', fileToUpload: { type: 'foo', size: 1000 } },
+    {},
+    () => 'progress',
+  )
   expect(mockUploadTask.on).toHaveBeenCalled()
 })

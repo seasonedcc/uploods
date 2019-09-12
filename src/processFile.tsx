@@ -5,10 +5,11 @@ import {
   ImageConfig,
   FileData,
   Uploader,
+  ProcessedFileData,
 } from './typeDeclarations'
 
 
-export const processFile = async (file: File, config: ImageConfig = {}) => {
+export const processFile = async (file: File, config: ImageConfig = {}): Promise<ProcessedFileData> => {
     const preparedFile = await prepareImage(file, config)
     const fileData = await getFileData(preparedFile)
     const timeStamp = new Date().getTime().toString()
@@ -21,7 +22,6 @@ export const processFile = async (file: File, config: ImageConfig = {}) => {
         ...fileData,
         name: finalName,
         id,
-        type: file.type,
         fileToUpload: preparedFile,
     }
 }

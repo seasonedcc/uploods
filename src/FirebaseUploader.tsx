@@ -2,8 +2,7 @@ import firebase from 'firebase/app'
 import 'firebase/storage'
 import get from 'lodash/get'
 
-import { UploodAPIConfig, ImageConfig, FileData, Uploader } from './typeDeclarations'
-import { processFile } from './processFile'
+import { UploodAPIConfig, ProcessedFileData, FileData, Uploader } from './typeDeclarations'
 
 const stateMap = {
   [firebase.storage.TaskState.PAUSED]: 'paused',
@@ -23,11 +22,10 @@ export class FirebaseUploader implements Uploader{
   }
 
   upload = async (
-    file: File,
-    config: ImageConfig = {},
+    file: ProcessedFileData,
     progressFn?: (t: FileData) => void,
   ) => {
-    const {fileToUpload, ...fileData} = await processFile(file, config)
+    const {fileToUpload, ...fileData} = file
     const metadata = { contentType: file.type }
 
     const storageRef = this.storage.ref()

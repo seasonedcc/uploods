@@ -25,12 +25,20 @@ export interface FileData {
   bucket?: string
 }
 
+export interface ProcessedFileData {
+  name: string
+  id: string
+  type: string
+  size?: number
+  parsed?: string | ArrayBuffer | null
+  fileToUpload: File
+}
+
 export type FileState = { [key: string]: FileData }
 
 export type Uploader = {
   upload: (
-    file: File,
-    config: ImageConfig,
+    file: ProcessedFileData,
     progressFn?: (t: FileData) => void,
   ) => Promise<FileData>
 }
