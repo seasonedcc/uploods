@@ -1,6 +1,7 @@
+import compact from 'lodash/compact'
 // @ts-ignore
 import { fileToBase64 } from '@seasonedsoftware/utils/dist/helpers'
-import { ImageConfig } from './typeDeclarations'
+import { ImageConfig, ProcessedFileData } from './typeDeclarations'
 
 const { readAndCompressImage } = require('browser-image-resizer')
 
@@ -31,4 +32,24 @@ export const prepareImage = async (
     return image
   }
   return file
+}
+
+export const processFile = async (
+  file: File,
+  config: ImageConfig = {},
+): Promise<ProcessedFileData> => {
+  const preparedFile = await prepareImage(file, config)
+  const fileData = await getFileData(preparedFile)
+  const timeStamp = new Date().getTime().toString()
+  const finalName = config.overwrite
+    ? fileData.name
+    : `${timeStamp}-${fileData.name}`
+  const id = compact(['uploods', config.prefix, finalName]).join('/')
+
+  return {
+    ...fileData,
+    name: finalName,
+    id,
+    fileToUpload: preparedFile,
+  }
 }

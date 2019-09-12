@@ -36,11 +36,6 @@ jest.mock('firebase/app', () => ({
   },
 }))
 
-jest.mock('../utils', () => ({
-  getFileData: () => ({ name: 'image', size: 2000 }),
-  prepareImage: () => ({ name: 'image', size: 2000 }),
-}))
-
 it('calls uploadTask', async () => {
   const config = {
     firebase: true,

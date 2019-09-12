@@ -5,7 +5,7 @@ import {
   Uploader,
 } from './typeDeclarations'
 import { FirebaseUploader } from './FirebaseUploader'
-import { processFile } from './processFile'
+import { processFile } from './utils'
 
 export class Uploods {
   uploader: Uploader | null
