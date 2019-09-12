@@ -7,7 +7,7 @@ import { Uploods } from './Uploods'
 import styles from './styles'
 // @ts-ignore
 import { LinearGradient, Countdown } from '@seasonedsoftware/utils/dist/ui'
-import { FileData, UploodAPIConfig } from './typeDeclarations'
+import { UploodAPIConfig, FileData } from './typeDeclarations'
 
 const gradientColors = [1, 0.5, 0.1, 0, 0].map(n => `rgba(0,0,0,${n})`)
 
@@ -80,7 +80,7 @@ export const DropPicture = ({
   async function uploadFiles(accepted: File[]) {
     if (accepted.length) {
       const [file] = accepted
-      const uploaded = await api.upload(
+      const uploaded = await api.process(
         file,
         { prefix, maxDimension, quality, overwrite },
         setFile,

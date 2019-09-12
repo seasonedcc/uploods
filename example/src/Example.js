@@ -10,14 +10,15 @@ const Example = () => {
   const [config, setConfig] = useState({
     apiKey: process.env.REACT_APP_API_KEY,
     storageBucket: process.env.REACT_APP_BUCKET,
+    mode: 'firebase',
   })
   useEffect(() => {
     if (!config.apiKey || !config.storageBucket) {
       const apiKey = prompt('Please enter your Firebase API key')
       const storageBucket = prompt('Please enter your Storage Bucket')
-      setConfig({ apiKey, storageBucket })
+      setConfig({ ...config, apiKey, storageBucket })
     }
-  }, [config.apiKey, config.storageBucket])
+  }, [config])
   return !config.apiKey || !config.storageBucket ? null : (
     <Provider {...config}>
       <Card elevation={5}>
@@ -126,7 +127,7 @@ const [files, setFiles] = useState([])
 // First initialize with your firebase info
 const api = new Uploods({ apiKey, storageBucket })
 // Then call the upload function
-api.upload(myFile).then(fileData =>
+api.process(myFile).then(fileData =>
   console.log(
     fileData.url,
     fileData.fullPath,
@@ -136,13 +137,13 @@ api.upload(myFile).then(fileData =>
   ))
 
 // If you want to resize images before uploading
-api.upload(myFile, {
+api.process(myFile, {
   maxDimension: 400,
   quality: .4,
 }).then(/* ... */)
 
 // If you want to monitor progress
-api.upload(myFile, myConfig, file => {
+api.process(myFile, myConfig, file => {
   console.log(
     file.id, // the path in which the file is stored
     file.name // the filename
