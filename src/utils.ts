@@ -1,6 +1,6 @@
 import compact from 'lodash/compact'
 // @ts-ignore
-import { fileToBase64 } from '@seasonedsoftware/utils/dist/helpers'
+import { fileToBase64 } from '@seasonedsoftware/utils'
 import { ImageConfig, ProcessedFileData } from './typeDeclarations'
 
 const { readAndCompressImage } = require('browser-image-resizer')
