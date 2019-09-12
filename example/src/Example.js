@@ -10,7 +10,7 @@ const Example = () => {
   const [config, setConfig] = useState({
     apiKey: process.env.REACT_APP_API_KEY,
     storageBucket: process.env.REACT_APP_BUCKET,
-    mode: 'firebase',
+    autoUpload,
   })
   useEffect(() => {
     if (!config.apiKey || !config.storageBucket) {
@@ -101,7 +101,10 @@ const [files, setFiles] = useState([])
       <Card elevation={5}>
         <CardHeader title="Configuring" />
         <CardContent>
-          <p>You must provide some firebase basic configuration</p>
+          <p>
+            If you want to auto upload to firebase, you must provide some
+            firebase basic configuration and the autoUpload flag as true.
+          </p>
         </CardContent>
         <SyntaxHighlighter language="javascript" style={prism}>
           {`import { DropZone, Provider } from 'uploods'
@@ -110,6 +113,7 @@ const [files, setFiles] = useState([])
 <Provider
   storageBucket="MyFirebaseBucket"
   apiKey="MyFirebaseAPIKey"
+  autoUpload
 >
   <DropZone ... />
 </Provider>
@@ -124,8 +128,8 @@ const [files, setFiles] = useState([])
         <SyntaxHighlighter language="javascript" style={prism}>
           {`import { Uploods } from 'uploods'
 
-// First initialize with your firebase info
-const api = new Uploods({ apiKey, storageBucket })
+// First initialize with your firebase info (if you want auto upload, if not, you don't need to pass any config)
+const api = new Uploods({ apiKey, storageBucket, autoUpload: true })
 // Then call the upload function
 api.process(myFile).then(fileData =>
   console.log(
