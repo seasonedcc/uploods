@@ -1,10 +1,9 @@
 import firebase from 'firebase/app'
 import 'firebase/storage'
-import compact from 'lodash/compact'
 import get from 'lodash/get'
 
-import { getFileData, prepareImage } from './utils'
 import { UploodAPIConfig, ImageConfig, FileData, Uploader } from './typeDeclarations'
+import { processFile } from './processFile'
 
 const stateMap = {
   [firebase.storage.TaskState.PAUSED]: 'paused',
@@ -28,17 +27,11 @@ export class FirebaseUploader implements Uploader{
     config: ImageConfig = {},
     progressFn?: (t: FileData) => void,
   ) => {
-    const fileData = await getFileData(file)
-    const timeStamp = new Date().getTime().toString()
-    const finalName = config.overwrite
-      ? fileData.name
-      : `${timeStamp}-${fileData.name}`
-    const fileToUpload = await prepareImage(file, config)
-    const id = compact(['uploods', config.prefix, finalName]).join('/')
+    const {fileToUpload, ...fileData} = await processFile(file, config)
     const metadata = { contentType: file.type }
 
     const storageRef = this.storage.ref()
-    const uploadTask = storageRef.child(id).put(fileToUpload, metadata)
+    const uploadTask = storageRef.child(fileData.id).put(fileToUpload, metadata)
     const result: FileData = await new Promise(resolve =>
       uploadTask.on(
         'state_changed',
@@ -49,8 +42,6 @@ export class FirebaseUploader implements Uploader{
             const state = get(stateMap, snapshot.state, 'running')
             progressFn({
               ...fileData,
-              name: finalName,
-              id,
               percent,
               state,
               uploadTask,
@@ -66,7 +57,6 @@ export class FirebaseUploader implements Uploader{
           const { size, type } = fileToUpload
           resolve({
             ...fileData,
-            id,
             percent: 100,
             state: 'done',
             uploadTask: null,
