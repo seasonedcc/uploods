@@ -10,7 +10,7 @@ const Example = () => {
   const [config, setConfig] = useState({
     apiKey: process.env.REACT_APP_API_KEY,
     storageBucket: process.env.REACT_APP_BUCKET,
-    autoUpload,
+    autoUpload: true,
   })
   useEffect(() => {
     if (!config.apiKey || !config.storageBucket) {
