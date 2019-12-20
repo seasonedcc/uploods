@@ -1,6 +1,6 @@
 {
   "name": "uploods",
-  "version": "0.6.1",
+  "version": "0.6.3",
   "description": "Uploods React component",
   "author": "SeasonedSoftware",
   "license": "MIT",
@@ -27,10 +27,10 @@
     "postrelease": "npm publish && git push --tags && git push"
   },
   "dependencies": {
+    "@babel/runtime": "^7.4.5",
     "browser-image-resizer": "^2.0.1",
     "prop-types": "^15.7.2",
-    "react-dropzone": "^10.1.5",
-    "@babel/runtime": "^7.4.5"
+    "react-dropzone": "^10.1.5"
   },
   "peerDependencies": {
     "@material-ui/core": "^4.2.1",
@@ -38,8 +38,8 @@
     "@seasonedsoftware/utils": "^0.0.3",
     "firebase": "^6.3.1",
     "lodash": "4.17.15",
-    "react": "^16.8.6",
-    "react-dom": "^16.8.6"
+    "react": "^16.12.0",
+    "react-dom": "^16.12.0"
   },
   "devDependencies": {
     "@babel/core": "^7.5.5",
@@ -51,7 +51,7 @@
     "@babel/preset-typescript": "^7.3.3",
     "@material-ui/core": "^4.2.1",
     "@material-ui/icons": "^4.2.1",
-    "@seasonedsoftware/eslint-config": "^1.0.0",
+    "@seasonedsoftware/eslint-config": "^2.0.1",
     "@seasonedsoftware/utils": "^0.0.2",
     "@types/lodash": "^4.14.136",
     "@types/react": "^16.8.23",
@@ -62,8 +62,8 @@
     "lodash": "^4.17.14",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
-    "react-scripts": "^3.0.1",
-    "react-test-renderer": "^16.8.6",
+    "react-scripts": "^3.3.0",
+    "react-test-renderer": "^16.12.0",
     "readline-promise": "^1.0.4",
     "replace-in-file": "^4.1.1",
     "rollup": "^1.17.0",
@@ -73,7 +73,7 @@
     "rollup-plugin-node-resolve": "^5.2.0",
     "rollup-plugin-peer-deps-external": "^2.2.0",
     "rollup-plugin-postcss": "^2.0.3",
-    "rollup-plugin-uglify": "^6.0.2",
+    "rollup-plugin-uglify": "^6.0.4",
     "typescript": "^3.5.3"
   }
 }
