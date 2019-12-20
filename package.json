@@ -51,7 +51,7 @@
     "@babel/preset-typescript": "^7.3.3",
     "@material-ui/core": "^4.2.1",
     "@material-ui/icons": "^4.2.1",
-    "@seasonedsoftware/eslint-config": "^1.0.0",
+    "@seasonedsoftware/eslint-config": "^2.0.1",
     "@seasonedsoftware/utils": "^0.0.2",
     "@types/lodash": "^4.14.136",
     "@types/react": "^16.8.23",
