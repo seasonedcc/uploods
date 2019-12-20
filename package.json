@@ -1,6 +1,6 @@
 {
   "name": "uploods",
-  "version": "0.6.1",
+  "version": "0.6.2",
   "description": "Uploods React component",
   "author": "SeasonedSoftware",
   "license": "MIT",
@@ -27,10 +27,10 @@
     "postrelease": "npm publish && git push --tags && git push"
   },
   "dependencies": {
+    "@babel/runtime": "^7.4.5",
     "browser-image-resizer": "^2.0.1",
     "prop-types": "^15.7.2",
-    "react-dropzone": "^10.1.5",
-    "@babel/runtime": "^7.4.5"
+    "react-dropzone": "^10.1.5"
   },
   "peerDependencies": {
     "@material-ui/core": "^4.2.1",
