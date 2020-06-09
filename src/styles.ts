@@ -14,6 +14,7 @@ const Styles: styleObj = {
   pictureWrapper: {
     position: 'relative',
     color: 'white',
+    cursor: 'pointer',
   },
   pictureInput: {
     maxWidth: '100%',
@@ -25,14 +26,18 @@ const Styles: styleObj = {
     width: '100%',
     height: '100%',
   },
-  pictureGradient: {
-    position: 'absolute',
-    top: 0,
-    bottom: 0,
-    left: 0,
-    right: 0,
+  pictureBackground: {
+    objectFit: 'cover',
+    width: '100%',
+    height: '100%',
+    backgroundColor: 'lightGray',
+    position: 'relative',
   },
-  pictureIcon: { position: 'absolute', bottom: 10, right: 10 },
+  pictureIcon: {
+    position: 'absolute',
+    bottom: 10,
+    left: '45%',
+  },
 }
 
 export default Styles

@@ -29,7 +29,7 @@ const Example = () => {
             initialSrc="https://source.unsplash.com/random/200x200"
             maxDimension={200}
             quality={1}
-            onChange={() => console.log('Uploaded!')}
+            onChange={(file, status) => console.log('Updated!', file, status)}
           />
         </CardContent>
         <SyntaxHighlighter language="javascript" style={prism}>
@@ -43,6 +43,32 @@ const [file, setFile] = useState([])
   quality={1 /* 0.1-1 */}
   initialSrc="https://source.unsplash.com/random/200x200"
   onChange={setFile}
+/>
+`}
+        </SyntaxHighlighter>
+      </Card>
+      <Card elevation={5}>
+        <CardHeader title="Round DropPicture without initial image" />
+        <CardContent>
+          <DropPicture
+            overwrite
+            maxDimension={200}
+            quality={1}
+            onChange={(file, status) => console.log('Updated!', file, status)}
+            wrapperStyle={{ borderRadius: '50%', overflow: 'hidden' }}
+          />
+        </CardContent>
+        <SyntaxHighlighter language="javascript" style={prism}>
+          {`import { DropPicture } from 'uploods'
+
+// MyComponent
+const [file, setFile] = useState([])
+<DropPicture
+  overwrite
+  maxDimension={200}
+  quality={1 /* 0.1-1 */}
+  onChange={(file, status) => console.log('Updated!', file, status)} /* status: 'idle', 'uploading', 'done' */
+  wrapperStyle={{ borderRadius: '50%', overflow: 'hidden' }}
 />
 `}
         </SyntaxHighlighter>
