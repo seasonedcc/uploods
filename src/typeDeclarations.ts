@@ -9,6 +9,7 @@ export interface ImageConfig {
   maxDimension?: number
   quality?: number
   overwrite?: boolean
+  autoRotate?: boolean
 }
 
 export interface FileData {

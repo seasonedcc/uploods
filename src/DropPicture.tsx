@@ -1,15 +1,28 @@
-import React, { useState, useMemo, useContext } from 'react'
-import { CircularProgress } from '@material-ui/core'
-import { AddAPhoto, CloudDone } from '@material-ui/icons'
+import React, { useState, useMemo, useContext, useEffect } from 'react'
+import CircularProgress from '@material-ui/core/CircularProgress'
+import AddAPhoto from '@material-ui/icons/AddAPhoto'
+import CloudDone from '@material-ui/icons/CloudDone'
 import ReactDropzone from 'react-dropzone'
 import { Context } from './Provider'
 import { Uploods } from './Uploods'
 import styles from './styles'
 // @ts-ignore
-import { LinearGradient, Countdown } from '@seasonedsoftware/utils/dist/ui'
+import { Countdown } from '@seasonedsoftware/utils/dist/ui'
 import { UploodAPIConfig, FileData } from './typeDeclarations'
 
-const gradientColors = [1, 0.5, 0.1, 0, 0].map(n => `rgba(0,0,0,${n})`)
+const DefaultBackground = () => (
+  <div style={styles.pictureBackground}>
+    <AddAPhoto
+      fontSize="large"
+      style={{
+        position: 'absolute',
+        top: '50%',
+        left: '50%',
+        transform: 'translate(-50%, -50%)',
+      }}
+    />
+  </div>
+)
 
 export const DropPicture = ({
   onChange,
@@ -21,14 +34,22 @@ export const DropPicture = ({
   prefix = 'droppicture',
   initialSrc,
   config,
+  autoRotate = false,
+  background = <DefaultBackground />,
 }: DropPictureProps) => {
   const [file, setFile] = useState()
   const [uploaded, setUploaded] = useState(false)
+  const [uploadStatus, setUploadStatus] = useState('idle')
   const inheritedConfig = useContext(Context)
   const api = useMemo(
     () => new Uploods((config || inheritedConfig) as UploodAPIConfig),
-    [],
+    []
   )
+  useEffect(() => {
+    if (onChange) {
+      onChange(file, uploadStatus)
+    }
+  }, [file, uploadStatus, onChange])
 
   const src = file ? file.url || file.parsed : initialSrc
 
@@ -50,27 +71,30 @@ export const DropPicture = ({
           }}
         >
           <input {...getInputProps()} style={styles.pictureInput} />
-          <img
-            style={styles.pictureImg}
-            src={src}
-            className={isDragActive ? 'active' : 'active'}
-          />
-          <LinearGradient deg={0} colors={gradientColors}>
-            <div style={styles.pictureGradient} />
-          </LinearGradient>
+          {src ? (
+            <img
+              style={styles.pictureImg}
+              src={src}
+              className={isDragActive ? 'active' : 'active'}
+            />
+          ) : (
+            background
+          )}
+
           {uploaded ? (
             <>
               <Countdown active time={3} onFinish={() => setUploaded(false)} />
               <CloudDone style={styles.pictureIcon} color="inherit" />
             </>
-          ) : file && file.state === 'running' ? (
-            <CircularProgress
-              color="inherit"
-              size={23}
-              style={styles.pictureIcon}
-            />
           ) : (
-            <AddAPhoto style={styles.pictureIcon} color="inherit" />
+            file &&
+            file.state === 'running' && (
+              <CircularProgress
+                color="inherit"
+                size={23}
+                style={styles.pictureIcon}
+              />
+            )
           )}
         </div>
       )}
@@ -80,20 +104,22 @@ export const DropPicture = ({
   async function uploadFiles(accepted: File[]) {
     if (accepted.length) {
       const [file] = accepted
+
+      setUploadStatus('uploading')
       const uploaded = await api.process(
         file,
-        { prefix, maxDimension, quality, overwrite },
-        setFile,
+        { prefix, maxDimension, quality, overwrite, autoRotate },
+        setFile
       )
+      setUploadStatus('done')
       setFile(uploaded)
       setUploaded(true)
-      onChange(uploaded)
     }
   }
 }
 
 interface DropPictureProps {
-  onChange: (t: FileData) => void
+  onChange: (t?: FileData, a?: string) => void
   maxSize?: number
   maxDimension?: number
   overwrite?: boolean
@@ -102,5 +128,7 @@ interface DropPictureProps {
   wrapperStyle?: any
   initialSrc?: string
   config?: UploodAPIConfig
+  autoRotate?: boolean
+  background?: JSX.Element | Element
   // Component: string | JSX.Element
 }
