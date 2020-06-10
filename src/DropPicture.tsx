@@ -49,7 +49,7 @@ export const DropPicture = ({
     if (onChange) {
       onChange(file, uploadStatus)
     }
-  }, [file, uploadStatus, onChange])
+  }, [file, uploadStatus])
 
   const src = file ? file.url || file.parsed : initialSrc
 
