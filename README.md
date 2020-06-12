@@ -62,7 +62,19 @@ Go to https://console.firebase.google.com/
 6. Cloud store location: By default, choose `us-east-1`. That one is included in the Spark plan, the free one.
 7. Click "Finish" and wait for it to create your default bucket.
 8. It will redirect you to your bucket. The URL is like `https://console.firebase.google.com/u/0/project/<your-project>/storage/<your-bucket>/files`
-9. Copy the bucket link: `gs://<your-bucket-id>.appspot.com`. Use that link to identify your bucket.
+9. On the `Files` tab, copy the bucket link: `gs://<your-bucket-id>.appspot.com`. Use that link to identify your bucket.
+10. Go to `Rules` tab and edit the rules to enable read, write to all.
+```
+rules_version = '2';
+service firebase.storage {
+  match /b/{bucket}/o {
+    match /{allPaths=**} {
+      allow read, write;
+    }
+  }
+}
+```
+11. Publish the rules. Note that Firebase doesn't recommend using these settings for production.
 
 ## Components
 
