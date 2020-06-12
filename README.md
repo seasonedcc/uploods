@@ -4,7 +4,22 @@
 [![Test Coverage](https://api.codeclimate.com/v1/badges/18fbd22734bcc645f72b/test_coverage)](https://codeclimate.com/github/SeasonedSoftware/uploods/test_coverage)
 ![npm bundle size](https://img.shields.io/bundlephobia/min/uploods)
 
-Describe uploods here.
+A package with components for file uploads.
+
+## Installation
+
+```
+yarn add uploods
+```
+
+If you want to use "upload on drop", also install firebase.
+```
+yarn add firebase
+```
+
+## Components
+
+### DropZone
 
 | Property                            |  Type  | Required |                     Default                     |
 | ----------------------------------- | :----: | :------: | :---------------------------------------------: |
