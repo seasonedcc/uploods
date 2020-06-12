@@ -74,7 +74,7 @@ service firebase.storage {
   }
 }
 ```
-11. Publish the rules.
+11. Publish the rules. Note that Firebase doesn't recommend using these settings for production.
 
 ## Components
 
