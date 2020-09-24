@@ -13,6 +13,7 @@ yarn add uploods
 ```
 
 If you want to use "upload on drop", also install firebase.
+
 ```
 yarn add firebase
 ```
@@ -26,19 +27,21 @@ You need two things: An api key and a bucket link.
 Go to https://console.firebase.google.com/
 
 ##### Create a project
+
 1. Click "Add project" or "Create project", whichever appears to you
 2. Choose a name for the project
 3. Uncheck "Activate Google Analytics" if you only want to use storage
 4. Click "Create project"
 
 ##### Create a web app for the project to get an API key
+
 1. Click the project you just created under "Your Firebase projects". You should be at "https://console.firebase.google.com/u/0/project/<your-project>/overview"
 2. Under you app name, click "Add app" or choose the Web option under "Start adding Firebase to your app".
 3. Choose a name for your web app. Uncheck "Configure Firebase hosting for this app".
 4. Click Register app
 5. Firebase will load "Add Firebase SDK" and show its full script.
 6. Copy your `apiKey` to use in your env vars. You can disregard the rest if you're using only storage.
-  
+
 ```
 ...
 
@@ -54,6 +57,7 @@ Go to https://console.firebase.google.com/
 ```
 
 ##### Configure storage to get a Bucket URL
+
 1. Go back to the overview console
 2. Click "Develop" on the side bar
 3. Click "Storage"
@@ -64,6 +68,7 @@ Go to https://console.firebase.google.com/
 8. It will redirect you to your bucket. The URL is like `https://console.firebase.google.com/u/0/project/<your-project>/storage/<your-bucket>/files`
 9. On the `Files` tab, copy the bucket link: `gs://<your-bucket-id>.appspot.com`. Use that link to identify your bucket.
 10. Go to `Rules` tab and edit the rules to enable read, write to all.
+
 ```
 rules_version = '2';
 service firebase.storage {
@@ -74,6 +79,7 @@ service firebase.storage {
   }
 }
 ```
+
 11. Publish the rules. Note that Firebase doesn't recommend using these settings for production.
 
 ## Components
@@ -88,10 +94,16 @@ service firebase.storage {
 | [hideList](#hidelist)               |  Bool  |          |                      false                      |
 | [accept](#accept)                   | Array  |          |                      ['*']                      |
 | [maxSize](#maxsize)                 |  Int   |          |                    10 000 kb                    |
-| [elevation](#elevation)             |  Int   |          |                        0                        |
+| [maxDimension](#maxdimension)       |  Int   |          |                                                 |
+| [overwrite](#overwrite)             |  Bool  |          |                                                 |
+| [quality](#quality)                 |  Int   |          |                                                 |
+| [prefix](#prefix)                   | String |          |                                                 |
+| [paperProps](#paperProps)           |        |          |                 { evelation:0 }                 |
+| [config](#config)                   |        |          |                                                 |
 | [text](#text)                       | String |          | 'Drag some files here or click to select files' |
 | [dragActiveText](#dragactivetext)   | String |          |                  'Drop here!'                   |
 | [unsupportedText](#unsupportedtext) | String |          |              'Unsupported File...'              |
+| [showRemoveIcon](#showremoveicon)   |  Bool  |          |                      true                       |
 
 ## onChange
 
@@ -147,3 +159,25 @@ Text shown when a file is rejected (either by file type or size).
 ```
 
 ```
+
+## Contributing
+
+### Running in dev mode
+
+To run the project, after cloning, install the dependencies both for the lib and for its the example. Then, run both in separate terminals.
+
+```
+yarn
+yarn start
+```
+
+Then on another terminal,
+
+```
+cd example
+yarn start
+```
+
+The example will use your dev package and your changes will be reflected on it.
+
+### Publishing

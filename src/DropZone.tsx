@@ -27,6 +27,7 @@ export const DropZone = ({
   config,
   dragActiveText = 'Drop here!',
   unsupportedText = 'Unsupported File...',
+  showRemoveIcon = true,
 }: DropZoneProps) => {
   const [files, setFiles] = useState({})
   const [message, setMessage] = useState(text)
@@ -34,7 +35,7 @@ export const DropZone = ({
 
   const api = useMemo(
     () => new Uploods((config || inheritedConfig) as UploodAPIConfig),
-    [],
+    []
   )
 
   return (
@@ -61,15 +62,21 @@ export const DropZone = ({
         )}
       </ReactDropzone>
 
-      {hideList || <FilesList files={files} removeFile={removeFile} />}
+      {hideList || (
+        <FilesList
+          files={files}
+          removeFile={removeFile}
+          showRemoveIcon={showRemoveIcon}
+        />
+      )}
     </Paper>
   )
 
   async function uploadFiles(accepted: File[]) {
     const uploadedFiles: FileData[] = await Promise.all(
       accepted.map((file: File) =>
-        api.process(file, { prefix, maxDimension, quality, overwrite }, setFile),
-      ),
+        api.process(file, { prefix, maxDimension, quality, overwrite }, setFile)
+      )
     )
     const parsedFiles = reduce(
       uploadedFiles,
@@ -77,7 +84,7 @@ export const DropZone = ({
         sum[curr.id] = curr
         return sum
       },
-      {},
+      {}
     )
     const allFiles = { ...files, ...parsedFiles }
     setFiles(allFiles)
@@ -85,12 +92,12 @@ export const DropZone = ({
   }
 
   function emitChange(files: FileState) {
-    const emitted = map(files, val => omit(val, ['parsed']))
+    const emitted = map(files, (val) => omit(val, ['parsed']))
     onChange(emitted)
   }
 
   function setFile(file: FileData) {
-    setFiles(filesObj => ({ ...filesObj, [file.id]: file }))
+    setFiles((filesObj) => ({ ...filesObj, [file.id]: file }))
   }
 
   function removeFile(id: string) {
@@ -116,6 +123,7 @@ interface DropZoneProps {
   dragActiveText?: string
   unsupportedText?: string
   config?: UploodAPIConfig
+  showRemoveIcon?: Boolean
 }
 
 DropZone.propTypes = {
@@ -132,4 +140,5 @@ DropZone.propTypes = {
   text: PropTypes.string,
   dragActiveText: PropTypes.string,
   unsupportedText: PropTypes.string,
+  showRemoveIcon: PropTypes.bool,
 }

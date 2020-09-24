@@ -39,9 +39,10 @@ const FilePreview = ({ type, parsed }: FileData) => {
 interface ItemProps {
   file: FileData
   onClick: () => void
+  showRemoveIcon?: Boolean
 }
 
-const FileItem = ({ file, onClick }: ItemProps) => (
+const FileItem = ({ file, onClick, showRemoveIcon = true }: ItemProps) => (
   <ListItem alignItems="center">
     <FilePreview {...file} />
     {file.state === 'done' ? (
@@ -56,20 +57,23 @@ const FileItem = ({ file, onClick }: ItemProps) => (
         value={file.percent}
       />
     )}
-    <ListItemSecondaryAction>
-      <IconButton edge="end" aria-label="Remove" onClick={onClick}>
-        <RemoveCircle color="secondary" />
-      </IconButton>
-    </ListItemSecondaryAction>
+    {showRemoveIcon && (
+      <ListItemSecondaryAction>
+        <IconButton edge="end" aria-label="Remove" onClick={onClick}>
+          <RemoveCircle color="secondary" />
+        </IconButton>
+      </ListItemSecondaryAction>
+    )}
   </ListItem>
 )
 
 interface ListProps {
   removeFile: (t: string) => void
   files: FileState
+  showRemoveIcon?: Boolean
 }
 
-const FilesList = ({ files, removeFile }: ListProps) => {
+const FilesList = ({ files, removeFile, showRemoveIcon = true }: ListProps) => {
   if (!Object.keys(files).length) return null
   return (
     <React.Fragment>
@@ -79,6 +83,7 @@ const FilesList = ({ files, removeFile }: ListProps) => {
           <FileItem
             key={`file-${id}`}
             file={file}
+            showRemoveIcon={showRemoveIcon}
             onClick={() => {
               if (file.uploadTask && file.state === 'running') {
                 file.uploadTask.cancel()
