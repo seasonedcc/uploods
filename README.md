@@ -181,3 +181,16 @@ yarn start
 The example will use your dev package and your changes will be reflected on it.
 
 ### Publishing
+
+Update the Github pages docs:
+
+```
+yarn deploy
+```
+
+Create a new npm release:
+
+```
+yarn release major|minor|patch
+yarn postrelease
+```
