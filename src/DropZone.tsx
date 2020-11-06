@@ -28,6 +28,7 @@ export const DropZone = ({
   dragActiveText = 'Drop here!',
   unsupportedText = 'Unsupported File...',
   showRemoveIcon = true,
+  multiple = true,
 }: DropZoneProps) => {
   const [files, setFiles] = useState({})
   const [message, setMessage] = useState(text)
@@ -48,6 +49,7 @@ export const DropZone = ({
           setMessage(text)
         }}
         onDrop={uploadFiles}
+        multiple={multiple}
       >
         {({ getRootProps, getInputProps, isDragActive }) => (
           <div
@@ -124,6 +126,7 @@ interface DropZoneProps {
   unsupportedText?: string
   config?: UploodAPIConfig
   showRemoveIcon?: Boolean
+  multiple: boolean
 }
 
 DropZone.propTypes = {
@@ -141,4 +144,6 @@ DropZone.propTypes = {
   dragActiveText: PropTypes.string,
   unsupportedText: PropTypes.string,
   showRemoveIcon: PropTypes.bool,
+  maxFiles: PropTypes.number,
+  multiple: PropTypes.bool,
 }
