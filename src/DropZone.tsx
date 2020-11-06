@@ -121,7 +121,7 @@ interface DropZoneProps {
   maxDimension?: number
   paperProps?: any
   prefix?: string
-  text?: string
+  text?: string | Element
   dragActiveText?: string
   unsupportedText?: string
   config?: UploodAPIConfig
@@ -140,7 +140,7 @@ DropZone.propTypes = {
   maxDimension: PropTypes.number,
   paperProps: PropTypes.object,
   config: PropTypes.object,
-  text: PropTypes.string,
+  text: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
   dragActiveText: PropTypes.string,
   unsupportedText: PropTypes.string,
   showRemoveIcon: PropTypes.bool,
