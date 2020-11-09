@@ -99,7 +99,7 @@ export const DropZone = ({
   }
 
   function setFile(file: FileData) {
-    setFiles((filesObj) => ({ ...filesObj, [file.id]: file }))
+    setFiles((filesObj) => multiple ? ({ ...filesObj, [file.id]: file }) : ({ [file.id]: file }))
   }
 
   function removeFile(id: string) {
