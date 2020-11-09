@@ -40,6 +40,8 @@ export const DropZone = ({
     []
   )
 
+  const isDisabled = !multiple && !isEmpty(files)
+
   return (
     <Paper style={{ padding: '10px', ...containerStyle }} {...paperProps}>
       <ReactDropzone
@@ -51,7 +53,7 @@ export const DropZone = ({
         }}
         onDrop={uploadFiles}
         multiple={multiple}
-        disabled={!multiple && !isEmpty(files)}
+        disabled={isDisabled}
       >
         {({ getRootProps, getInputProps, isDragActive }) => (
           <div
@@ -59,7 +61,7 @@ export const DropZone = ({
             style={{ ...styles.dropzone, ...inputStyle }}
           >
             <input {...getInputProps()} />
-            <FormHelperText error={message === unsupportedText}>
+            <FormHelperText disabled={isDisabled} error={message === unsupportedText}>
               {isDragActive ? dragActiveText : message}
             </FormHelperText>
           </div>
