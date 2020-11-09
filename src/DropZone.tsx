@@ -10,6 +10,7 @@ import styles from './styles'
 import { Context } from './Provider'
 import { Uploods } from './Uploods'
 import { FileData, FileState, UploodAPIConfig } from './typeDeclarations'
+import { isEmpty} from 'lodash'
 
 export const DropZone = ({
   onChange,
@@ -50,6 +51,7 @@ export const DropZone = ({
         }}
         onDrop={uploadFiles}
         multiple={multiple}
+        disabled={!multiple && !isEmpty(files)}
       >
         {({ getRootProps, getInputProps, isDragActive }) => (
           <div
@@ -75,11 +77,14 @@ export const DropZone = ({
   )
 
   async function uploadFiles(accepted: File[]) {
+    if(!multiple) resetState()
+
     const uploadedFiles: FileData[] = await Promise.all(
       accepted.map((file: File) =>
         api.process(file, { prefix, maxDimension, quality, overwrite }, setFile)
       )
     )
+
     const parsedFiles = reduce(
       uploadedFiles,
       (sum: FileState, curr: FileData) => {
@@ -99,13 +104,18 @@ export const DropZone = ({
   }
 
   function setFile(file: FileData) {
-    setFiles((filesObj) => multiple ? ({ ...filesObj, [file.id]: file }) : ({ [file.id]: file }))
+    setFiles((filesObj) => ({ ...filesObj, [file.id]: file }))
   }
 
   function removeFile(id: string) {
     const allFiles = omit(files, id)
     setFiles(allFiles)
     emitChange(allFiles)
+  }
+
+  function resetState() {
+      setFiles({})
+      emitChange({})
   }
 }
 
