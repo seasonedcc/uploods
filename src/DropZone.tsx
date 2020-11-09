@@ -144,6 +144,5 @@ DropZone.propTypes = {
   dragActiveText: PropTypes.string,
   unsupportedText: PropTypes.string,
   showRemoveIcon: PropTypes.bool,
-  maxFiles: PropTypes.number,
   multiple: PropTypes.bool,
 }
