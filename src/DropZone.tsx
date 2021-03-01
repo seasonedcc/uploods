@@ -101,7 +101,7 @@ export const DropZone = ({
   }
 
   function emitChange(files: FileState) {
-    const emitted = map(files, (val) => omit(val, ['parsed']))
+    const emitted = map(files, (val) => val)
     onChange(emitted)
   }
 
