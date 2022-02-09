@@ -41,9 +41,7 @@ export const processFile = async (
   const preparedFile = await prepareImage(file, config)
   const fileData = await getFileData(preparedFile)
   const timeStamp = new Date().getTime().toString()
-  const finalName = config.overwrite
-    ? fileData.name
-    : `${timeStamp}-${fileData.name}`
+  const finalName = `${timeStamp}-${fileData.name}`
   const id = compact(['uploods', config.prefix, finalName]).join('/')
 
   return {
